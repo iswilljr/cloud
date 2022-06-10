@@ -9,10 +9,13 @@ const markdown: MarkdownIt = MarkdownIt({
 			try {
 				return (
 					'<pre><code class="highlight">' +
-					hljs.highlight(str, {
-						language: lang,
-						ignoreIllegals: true,
-					}).value +
+					hljs.highlightAuto(
+						str
+						// {
+						// language: lang,
+						// ignoreIllegals: true,
+						// }
+					).value +
 					"</code></pre>"
 				);
 			} catch (__) {}

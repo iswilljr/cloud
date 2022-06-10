@@ -8,3 +8,7 @@ node_modules
 #build
 build
 dist
+
+# js files
+*.js
+!.lintstagedrc.js

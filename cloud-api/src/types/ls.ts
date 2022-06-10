@@ -14,13 +14,9 @@ export interface Info extends Item {
 		has: boolean;
 		name: string;
 		content?: {
-			type: "html" | "text";
+			type: "html" | "text" | "markdown";
 			data: string;
 		};
-	};
-	content?: {
-		type: "html" | "text" | "media";
-		data: string;
 	};
 }
 
@@ -30,9 +26,9 @@ export interface Response {
 	data: {
 		info: Info;
 		content?: {
-			type: "html" | "text" | "media" | "directory";
+			type: "html" | "text" | "media" | "directory" | "markdown";
 			data: string | { files: Item[]; directories: Item[] };
-			mime?: string;
+			language?: string;
 		};
 	};
 }

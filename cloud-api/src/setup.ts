@@ -27,7 +27,7 @@ const setStorage = () => {
 			console.log("No se ingreso ninguna ruta de almacenamiento");
 			process.exit(1);
 		}
-		fs.writeFile(path.join(__dirname, "../.env"), `HOME_CLOUD_STORAGE=${storage}`, { encoding: "utf-8" })
+		fs.writeFile(path.join(__dirname, "../.env"), `HOME_CLOUD_STORAGE=${storage}`, "utf-8")
 			.then(() => {
 				console.log("Se ha creado el archivo de configuración");
 				console.log("Ruta de almacenamiento:", storage);
