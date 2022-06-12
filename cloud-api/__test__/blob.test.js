@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("./build/app").default;
+const app = require("../build/app").default;
 
 const TEST_DIRNAME = "__cloud_api_test__";
 const TEST_FILENAME_TXT = "test.txt";

@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("./build/app").default;
+const app = require("../build/app").default;
 
 describe("List endpoint", () => {
 	it("should list parent root directory", async () => {
