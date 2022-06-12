@@ -9,6 +9,5 @@ node_modules
 build
 dist
 
-# js files
-*.js
-!.lintstagedrc.js
+#logs
+*.log

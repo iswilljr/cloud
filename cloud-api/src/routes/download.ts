@@ -1,6 +1,6 @@
 import { Router } from "express";
 import fs from "fs/promises";
-import { processPath } from "../lib";
+import processPath from "../lib/process-path";
 import mime from "mime-types";
 const router = Router();
 

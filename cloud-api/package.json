@@ -9,40 +9,36 @@
 		"setup": "node ./build/setup.js",
 		"dev": "ts-node-dev --respawn src/index.ts",
 		"dev:setup": "ts-node-dev src/setup",
-		"build": "rm -rf build && tsc",
+		"tsc": "tsc --noEmit",
+		"build": "yarn tsc && rm -rf build && tsc",
 		"postinstall": "husky install",
 		"lint": "eslint './**/*.{js,ts}'",
 		"lint:fix": "yarn lint --fix",
-		"prettier": "prettier --write './**/*.{js,ts}'"
+		"prettier": "prettier --write './**/*.{js,ts}'",
+		"test": "cross-env NODE_ENV=test jest"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@vscode/vscode-languagedetection": "^1.0.21",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.0",
 		"express": "^4.17.3",
 		"file-size": "^1.0.0",
-		"file-type": "^17.1.1",
-		"filename2prism": "^3.0.0",
 		"get-folder-size": "^3.1.0",
-		"highlight.js": "^11.5.1",
-		"markdown-it": "^13.0.0",
 		"mime-types": "^2.1.35",
-		"morgan": "^1.10.0",
-		"tsimportlib": "^0.0.3"
+		"morgan": "^1.10.0"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.12",
 		"@types/express": "^4.17.13",
 		"@types/file-size": "^1.0.1",
-		"@types/markdown-it": "^12.2.3",
 		"@types/mime-types": "^2.1.1",
 		"@types/morgan": "^1.9.3",
 		"@types/node": "^17.0.31",
 		"@typescript-eslint/eslint-plugin": "^5.27.1",
 		"@typescript-eslint/parser": "^5.27.1",
+		"cross-env": "^7.0.3",
 		"eslint": "^8.0.1",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-config-standard": "^17.0.0",
@@ -51,10 +47,20 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-promise": "^6.0.0",
 		"husky": "^8.0.1",
+		"jest": "^28.1.1",
 		"lint-staged": "^13.0.1",
-		"nodemon": "^2.0.15",
 		"prettier": "^2.6.2",
+		"supertest": "^6.2.3",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^4.6.4"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"coveragePathIgnorePatterns": [
+			"/node_modules/"
+		],
+		"moduleFileExtensions": [
+			"js"
+		]
 	}
 }

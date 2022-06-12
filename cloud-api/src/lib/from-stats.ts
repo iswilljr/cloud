@@ -1,8 +1,8 @@
 import { Stats } from "fs";
 import path from "path";
 import { getSize } from ".";
-import { Info, Item } from "../types/ls";
-import getFolderSize from "./getFolderSize";
+import { Info, Item } from "../types/response";
+import getFolderSize from "./get-folder-size";
 
 class FromStats {
 	#stats: Stats;
@@ -15,31 +15,29 @@ class FromStats {
 		this.#absolute = absolute;
 	}
 
-	async #createItem() {
-		const item: Item = {
+	async #createItem(): Promise<Item> {
+		return {
 			id: this.#stats.ino,
 			path: this.#relative,
-			name: path.basename(this.#relative),
+			name: this.#relative === "/" ? "Home" : path.basename(this.#relative),
 			isDirectory: this.#stats.isDirectory(),
 			isFile: this.#stats.isFile(),
 			size: getSize(this.#stats.isFile() ? this.#stats.size : await getFolderSize(this.#absolute)),
 			modified: this.#stats.mtimeMs,
 			created: this.#stats.birthtimeMs,
 		};
-		return item;
 	}
 
-	async getItem(): Promise<Item> {
-		return await this.#createItem();
+	getItem() {
+		return this.#createItem();
 	}
 
 	async getInfo(): Promise<Info> {
-		const info: Info = Object.assign({}, await this.#createItem(), {
-			readme: this.#stats.isFile() ? null : { has: false, name: "" },
-		});
-		return info;
+		return { ...(await this.#createItem()), readme: { has: false } };
 	}
 }
+
+export { FromStats };
 
 export default function (stats: Stats, relative: string, absolute: string) {
 	return new FromStats(stats, relative, absolute);

@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import { join as joinPaths } from "path";
+import { IGNORE } from "./constants";
 
 /**
  * It recursively traverses a directory and returns the total size of all files in the directory
@@ -28,4 +29,4 @@ async function core(rootItemPath: string, ignore: RegExp): Promise<number> {
 	return folderSize;
 }
 
-export default async (path: string) => await core(path, /node_modules/g);
+export default async (path: string) => await core(path, IGNORE);
