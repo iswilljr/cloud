@@ -15,7 +15,7 @@
 		"lint": "eslint './**/*.{js,ts}'",
 		"lint:fix": "yarn lint --fix",
 		"prettier": "prettier --write './**/*.{js,ts}'",
-		"test": "cross-env NODE_ENV=test jest"
+		"test": "cross-env NODE_ENV=test jest --testTimeout=10000"
 	},
 	"keywords": [],
 	"author": "",

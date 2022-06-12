@@ -1,4 +1,6 @@
 module.exports = {
+	// Test
+	"**/*.(ts|js)": () => "yarn test",
 	// Type check TypeScript files
 	"**/*.(ts|js)": () => "yarn tsc --noEmit",
 
