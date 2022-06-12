@@ -10,12 +10,14 @@
 		"dev": "ts-node-dev --respawn src/index.ts",
 		"dev:setup": "ts-node-dev src/setup",
 		"tsc": "tsc --noEmit",
-		"build": "yarn tsc && rm -rf build && tsc",
+		"build": "rm -rf build && tsc",
+		"build:tsc": "yarn tsc && yarn build",
 		"postinstall": "husky install",
 		"lint": "eslint './**/*.{js,ts}'",
 		"lint:fix": "yarn lint --fix",
 		"prettier": "prettier --write './**/*.{js,ts}'",
-		"test": "cross-env NODE_ENV=test jest --testTimeout=10000"
+		"test": "cross-env NODE_ENV=test jest --testTimeout=10000",
+		"test:build": "yarn build && yarn test"
 	},
 	"keywords": [],
 	"author": "",
