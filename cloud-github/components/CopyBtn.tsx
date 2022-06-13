@@ -1,7 +1,6 @@
 import { createStyles } from "@mantine/core";
-import CopyIcon from "components/icons/CopyIcon";
 import { useClipboard } from "@mantine/hooks";
-import { CheckIcon } from "components/icons";
+import { CheckIcon, CopyIcon } from "@icons";
 
 const useStyles = createStyles(() => ({
 	control: {
@@ -23,12 +22,12 @@ const useStyles = createStyles(() => ({
 		border: "1px solid",
 		borderRadius: "6px",
 		color: "#c9d1d9",
-		backgroundColor: "#21262d",
+		backgroundColor: "var(--border-color)",
 		transition: "80ms cubic-bezier(0.33, 1, 0.68, 1)",
 		transitionProperty: "color,background-color,box-shadow,border-color",
 		"&:hover": {
-			backgroundColor: "#30363d",
-			borderColor: "#8b949e",
+			backgroundColor: "var(--border-hover-color)",
+			borderColor: "var(--icon-color)",
 			transitionDuration: ".1s",
 		},
 	},
@@ -36,11 +35,11 @@ const useStyles = createStyles(() => ({
 		borderColor: "rgba(240, 246, 253, .1)",
 	},
 	copiedBorder: {
-		borderColor: "#238636 !important",
+		borderColor: "var(--succes-color) !important",
 	},
 }));
 
-const CopyButton = ({ value }: { value: any }) => {
+const CopyBtn = ({ value }: { value: any }) => {
 	const { classes, cx } = useStyles();
 	const clipboard = useClipboard();
 
@@ -51,7 +50,7 @@ const CopyButton = ({ value }: { value: any }) => {
 			id="copy-btn"
 		>
 			{clipboard.copied ? (
-				<CheckIcon width="16" height="16" fill="#238636" />
+				<CheckIcon width="16" height="16" fill="var(--succes-color)" />
 			) : (
 				<CopyIcon width="16" height="16" fill="#c9d9d1" />
 			)}
@@ -59,4 +58,4 @@ const CopyButton = ({ value }: { value: any }) => {
 	);
 };
 
-export default CopyButton;
+export default CopyBtn;

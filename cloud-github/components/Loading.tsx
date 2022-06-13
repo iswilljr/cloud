@@ -1,6 +1,6 @@
-import { LoadingContext } from "context/loading-context";
-import { useContext } from "react";
 import { createStyles } from "@mantine/core";
+import { useContext } from "react";
+import { LoadingContext } from "context/loading-context";
 
 const useStyles = createStyles(() => ({
 	control: {

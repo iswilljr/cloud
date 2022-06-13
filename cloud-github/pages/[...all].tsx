@@ -1,23 +1,22 @@
-import { DefaultProps } from "api/Response";
-import { useStyles } from "components/styles";
-import Display from "components/Display/Display";
-import { getPath } from "utils/get-path";
-import { list } from "api";
-import { GetServerSidePropsContext } from "next";
-import CopyIcon from "components/icons/CopyIcon";
-import { CheckIcon, EditIcon } from "components/icons";
-import { useClipboard } from "@mantine/hooks";
-import Markdown from "components/Markdown/Markdown";
-import Highlight from "components/Highlight/Highlight";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { useContext, useEffect } from "react";
+import { getList } from "api";
+import { CommitIcon, EditIcon } from "@icons";
+import { ListProps } from "api/Response";
+import { useDefaultStyles, useListStyles, Button, Display, Markdown } from "components";
 import { LoadingContext } from "context/loading-context";
+import { getPath } from "utils/get-path";
+import { getDateAgo } from "utils/get-date-ago";
+import { buttons } from "utils/repo-files-buttons";
 
-const Home = ({ pathname, response }: DefaultProps) => {
-	const { classes, cx } = useStyles();
-	const clipboard = useClipboard();
+const Home = ({ pathname, response }: ListProps) => {
+	const { classes, cx } = useListStyles();
+	const { defaultClasses } = useDefaultStyles();
 	const { isLoading, setIsLoading } = useContext(LoadingContext);
 
-	console.log({ response, pathname });
+	console.log({ pathname, response });
 
 	useEffect(() => {
 		if (isLoading) setIsLoading(false);
@@ -26,73 +25,88 @@ const Home = ({ pathname, response }: DefaultProps) => {
 
 	return (
 		<>
-			{response.success && (
+			{response.success ? (
 				<>
-					{response.data.info.isDirectory && response.data.content.type === "directory" && (
-						<>
-							{pathname !== "/" && (
-								<Display
-									name=".."
-									path={`${pathname}/..`}
-									styles={{ name: { color: "#58a6ff", textDecoration: "none", fontSize: "18px" } }}
+					<div className={classes.fileNav}>
+						{buttons.map((button) =>
+							button === "divider" ? (
+								<div key="divider" style={{ flex: 1 }} />
+							) : (
+								<Button key={button.label} {...button} />
+							)
+						)}
+					</div>
+					<div className={classes.box}>
+						<div className={classes.boxHeader}>
+							<div className={classes.headerDetails}>
+								<Image
+									src="https://avatars.githubusercontent.com/u/97823389?v=4"
+									className={classes.avatar}
+									alt="user"
+									width="24"
+									height="24"
 								/>
-							)}
-							{[...response.data.content.data.directories, ...response.data.content.data.files].map((item) => (
-								<Display key={item.id} {...item} />
-							))}
-						</>
-					)}
-					{response.data.info.isFile && response.data.content.type !== "directory" && (
-						<div className={classes.file}>
-							<div className={classes.fileHeader}>
-								<div className={classes.info}>
-									{response.data.content.data.split("\n").length} lines
-									<span className={classes.divider}></span>
-									{response.data.info.size}
-									<span className={classes.divider}></span>
-									{response.data.content.type === "text" && response.data.content.language}
+								<div className={classes.moreDetails}>iswilljr</div>
+								<div className={classes.commits}>
+									<strong style={{ marginRight: "15px", color: "var(--icon-color)" }}>
+										{`Last modified ${getDateAgo(response.info.modified)}`}
+									</strong>
+									<CommitIcon width="16" height="16" fill="var(--text-color)" />
+									<strong>{response.info.name}</strong>
 								</div>
-								<div className={classes.icons}>
-									<span className={classes.icon} onClick={() => clipboard.copy(response.data.content.data)}>
-										{clipboard.copied ? <CheckIcon fill="#238636" id="copied" /> : <CopyIcon fill="#8b949e" />}
-									</span>
-									<span className={classes.icon}>
-										<EditIcon fill="#8b949e" />
-									</span>
-								</div>
-							</div>
-							<div className={classes.fileContent}>
-								{response.data.content.type === "text" && (
-									<Highlight
-										language={response.data.content.language ?? undefined}
-										code={response.data.content.data.replace(/\t/g, "  ")}
-										wrap
-										lineNumbers
-									/>
-								)}
-								{response.data.content.type === "markdown" && (
-									<div className={classes.markdown}>
-										<Markdown markdown={response.data.content.data} />
-									</div>
-								)}
 							</div>
 						</div>
+						{response.content.type === "directory" && (
+							<>
+								{pathname !== "/" && (
+									<Display
+										name=".."
+										path={`${pathname}/..`}
+										styles={{ name: { color: "var(--link-color)", textDecoration: "none", fontSize: "18px" } }}
+									/>
+								)}
+								{[...response.content.data.directories, ...response.content.data.files].map((item) => (
+									<Display key={item.id} {...item} />
+								))}
+							</>
+						)}
+					</div>
+					{response.info.readme.has ? (
+						<div className={classes.markdown}>
+							<div className={classes.markdownHeader}>
+								<div className={classes.markdownTitle}>
+									<Link href={`/home${pathname}${pathname.endsWith("/") ? "" : "/"}${response.info.readme.name}`}>
+										<a className={defaultClasses.anchor}>README.md</a>
+									</Link>
+								</div>
+								<div className={classes.markdownEdit}>
+									<EditIcon width="16" height="16" fill="var(--icon-color)" />
+								</div>
+							</div>
+							<div className={classes.markdownContent}>
+								<Markdown markdown={response.info.readme.content} />
+							</div>
+						</div>
+					) : (
+						<span>Add README.md</span>
 					)}
 				</>
+			) : (
+				<span>Something went wrong</span>
 			)}
 		</>
 	);
 };
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-	const pathname = getPath(context.query?.all);
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+	const pathname = getPath(ctx.query?.all);
 	let response;
 	try {
-		response = await list(pathname);
+		response = await getList(pathname);
 	} catch (error) {
 		response = error;
 	}
-	return { props: { pathname, response } };
-}
+	return { props: { pathname, response, type: "list" } };
+};
 
 export default Home;

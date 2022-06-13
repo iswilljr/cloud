@@ -1,4 +1,4 @@
-import { BranchIcon, TagsIcon } from "components/icons";
+import { BranchIcon, TagsIcon } from "@icons";
 
 interface Button {
 	label: string;
@@ -44,6 +44,6 @@ export const buttons: (Button | "divider")[] = [
 		dropdownIcon: true,
 		dropdownColor: "#fff",
 		styleButton: true,
-		style: { fontSize: "14px", padding: "8px 12px", height: "32px", background: "#238636", color: "#fff" },
+		style: { fontSize: "14px", padding: "8px 12px", height: "32px", background: "var(--succes-color)", color: "#fff" },
 	},
 ];

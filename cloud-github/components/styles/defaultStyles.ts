@@ -9,7 +9,7 @@ const useStyles = createStyles((theme) => ({
 		textDecoration: "none",
 		"&:hover": {
 			textDecoration: "underline",
-			color: "#58a6ff !important"
+			color: "var(--link-color) !important"
 		},
 		fontSize: "14px",
 		color: "#c9d1d9",
@@ -29,6 +29,9 @@ const useStyles = createStyles((theme) => ({
 	avatar: {
 		backgroundColor: "transparent !important",
 		borderRadius: "9999px",
+	},
+	hide: {
+		display: "none",
 	},
 }));
 

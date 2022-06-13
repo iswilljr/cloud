@@ -1,4 +1,4 @@
-import { ForkIcon, PinIcon, StarIcon, WatchIcon } from "components/icons";
+import { ForkIcon, PinIcon, StarIcon, WatchIcon } from "@icons";
 
 export const buttons = [
 	{ icon: PinIcon, label: "Pin", href: "#pin", showOnMdScreen: true },

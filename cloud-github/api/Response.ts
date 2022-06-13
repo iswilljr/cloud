@@ -9,18 +9,6 @@ export interface Item {
 	created: number;
 }
 
-export interface TypeFile {
-	type: "text" | "html" | "markdown";
-	data: string;
-	language: string;
-}
-
-export interface TypeMedia {
-	type: "media";
-	data: string;
-	mime: string;
-}
-
 export interface TypeDirectories {
 	type: "directory";
 	data: {
@@ -29,15 +17,24 @@ export interface TypeDirectories {
 	};
 }
 
-export interface Info extends Item {
-	readme: null | {
-		has: boolean;
-		name: string;
-		content: {
-			type: "text" | "html" | "markdown";
-			data: string;
-		};
-	};
+export interface BlobInfo extends Item {}
+
+export interface ListInfo extends Item {
+	readme: { has: false } | { has: true; name: string; content: string };
+}
+
+interface ResponseBase {
+	success: true;
+	path: string;
+	content: TypeDirectories | { type: "file" | "media" | "markdown"; data: string; language?: string };
+}
+
+export interface List extends ResponseBase {
+	info: ListInfo;
+}
+
+export interface Blob extends ResponseBase {
+	info: BlobInfo;
 }
 
 export interface ResponseFailure {
@@ -45,18 +42,18 @@ export interface ResponseFailure {
 	message: string;
 }
 
-export interface ResponseSuccess {
-	success: true;
-	path: string;
-	data: {
-		info: Info;
-		content: TypeFile | TypeDirectories | TypeMedia;
-	};
+export type ListResponse = List | ResponseFailure;
+
+export type BlobResponse = Blob | ResponseFailure;
+
+export interface ListProps {
+	type: "list";
+	response: ListResponse;
+	pathname: string;
 }
 
-export type Response = ResponseSuccess | ResponseFailure;
-
-export interface DefaultProps {
-	response: Response;
+export interface BlobProps {
+	type: "blob";
+	response: BlobResponse;
 	pathname: string;
 }

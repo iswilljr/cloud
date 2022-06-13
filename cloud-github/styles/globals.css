@@ -7,35 +7,18 @@ a {
 	box-sizing: border-box;
 }
 
-/* body::-webkit-scrollbar {
-	width: 15px;
-	padding: 1px;
-	box-sizing: border-box;
-	position: relative;
+:root {
+	--icon-color: #8b949e;
+	--link-color: #58a6ff;
+	--text-color: #c1d1d9;
+	--border-color: #21262d;
+	--border-hover-color: #30363d;
+	--succes-color: #238636;
+	--border-copy-color: rgba(240, 246, 253, 0.1);
+	--background-color: #0d1117;
+	--background-hover-color: #161b22;
+	--border-selected: #f78166;
 }
-
-body::-webkit-scrollbar-thumb {
-	width: 1px;
-	background-color: #686868;
-	border-radius: 2px;
-}
-body::-webkit-scrollbar-track {
-	background-color: #424242;
-}
-
-body::-webkit-scrollbar-button {
-	background-color: #ff0000;
-	color: #808080;
-	font-size: small;
-}
-
-body::-webkit-scrollbar-corner {
-	background-color: #4dff00;
-}
-
-body::-webkit-scrollbar-track-piece {
-	background-color: #001eff;
-} */
 
 .linear-progress {
 	-webkit-appearance: none;

@@ -4,6 +4,7 @@ export { default as BranchIcon } from "./BranchIcon";
 export { default as CheckIcon } from "./CheckIcon";
 export { default as CodeIcon } from "./CodeIcon";
 export { default as CommitIcon } from "./CommitIcon";
+export { default as CopyIcon } from "./CopyIcon";
 export { default as DropdownIcon } from "./DropdownIcon";
 export { default as EditIcon } from "./EditIcon";
 export { default as FileIcon } from "./FileIcon";

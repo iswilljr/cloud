@@ -8,7 +8,7 @@ import {
 	SecurityIcon,
 	SettingsIcon,
 	WikiIcon,
-} from "components/icons";
+} from "@icons";
 
 
 export const buttons = [

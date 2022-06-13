@@ -1,8 +1,6 @@
-import ReactMarkdown from "react-markdown";
-import Highlight from "components/Highlight/Highlight";
 import { createStyles } from "@mantine/core";
-import CopyIcon from "components/icons/CopyIcon";
-import CopyButton from "components/CopyButton/CopyButton";
+import ReactMarkdown from "react-markdown";
+import { Highlight, CopyBtn } from "components";
 
 const useStyles = createStyles(() => ({
 	control: {
@@ -34,23 +32,21 @@ const Markdown = ({ markdown }: MarkdownProps) => {
 			components={{
 				code({ node, inline, className, children, ...props }) {
 					const match = /language-(\w+)/.exec(className || "");
-					return (
+					return !inline && match ? (
 						<div className={classes.code}>
-							{!inline && match ? (
-								<Highlight
-									code={String(children).replace(/\n$/, "")}
-									language={match[1]}
-									preTag="pre"
-									styles={{ root: { backgroundColor: "#161b22", fontSize: "13.6px" } }}
-									//	{...props}
-								/>
-							) : (
-								<code className={className} {...props}>
-									{children}
-								</code>
-							)}
-							<CopyButton value={String(children)} />
+							<Highlight
+								code={String(children).replace(/\n$/, "")}
+								language={match[1]}
+								preTag="pre"
+								styles={{ root: { backgroundColor: "var(--background-hover-color)", fontSize: "13.6px" } }}
+								//	{...props}
+							/>
+							<CopyBtn value={String(children)} />
 						</div>
+					) : (
+						<code className={className} {...props}>
+							{children}
+						</code>
 					);
 				},
 				pre: "div",

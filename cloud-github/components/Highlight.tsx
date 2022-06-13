@@ -10,14 +10,21 @@ interface HighlightProps {
 		lineNumbers?: React.CSSProperties;
 		root?: React.CSSProperties;
 	};
-	preTag?: keyof JSX.IntrinsicElements
+	preTag?: keyof JSX.IntrinsicElements;
 }
 
-const Highlight = ({ code, language = "javascript", lineNumbers = false, wrap = false, styles,preTag }: HighlightProps) => {
+const Highlight = ({
+	code,
+	language = "javascript",
+	lineNumbers = false,
+	wrap = false,
+	styles,
+	preTag,
+}: HighlightProps) => {
 	return (
 		<SyntaxHighlighter
 			language={language}
-			lineNumberStyle={{ width: "50px", textAlign: "right", color: "#8b949e", ...styles?.lineNumbers }}
+			lineNumberStyle={{ width: "50px", textAlign: "right", color: "var(--icon-color)", ...styles?.lineNumbers }}
 			customStyle={{ fontSize: "12px", margin: 0, ...styles?.root }}
 			wrapLongLines={wrap}
 			showLineNumbers={lineNumbers}
