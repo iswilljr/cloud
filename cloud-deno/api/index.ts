@@ -13,11 +13,11 @@ class Api {
 			return e.response.data;
 		}
 	}
-	async list(url: string = "/"): Promise<ResponseSuccess | ResponseFailure> {
-		return await this.#apiCall(() => this.#api.get(`/ls${url}`));
+	list(url: string = "/"): Promise<ResponseSuccess | ResponseFailure> {
+		return  this.#apiCall(() => this.#api.get(`/ls${url}`));
 	}
 }
 
 const api = new Api(process.env.NEXT_PUBLIC_API_URL ?? "");
 
-export const list = async (url: string) => await api.list(url);
+export const list = api.list.bind(api);
