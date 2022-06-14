@@ -24,7 +24,7 @@ router.get("/?*", async (req, res, next) => {
 			const itemStat = await fs.lstat(itemPath);
 			const itemInfo: Item = await fromStats(itemStat, path.join(relativePath, name), itemPath).getItem();
 			content[itemInfo.isDirectory ? "directories" : "files"].push(itemInfo);
-			if (name.toLowerCase() === "readme.md" && info.readme.has && info.readme.name !== "README.md") {
+			if (name.toLowerCase() === "readme.md" && info.readme.name !== "README.md") {
 				info.readme = { has: true, name, content: "" };
 			}
 		}
@@ -32,7 +32,9 @@ router.get("/?*", async (req, res, next) => {
 		sortBy(content.directories, "name");
 		sortBy(content.files, "name");
 
-		if (info.readme.has) info.readme.content = await fs.readFile(path.join(absolutePath, info.readme.name), "utf8");
+		if (info.readme.has && info.readme.name) {
+			info.readme.content = await fs.readFile(path.join(absolutePath, info.readme?.name), "utf8");
+		}
 
 		response.content = { type: "directory", data: content };
 		res.status(200).json(response);

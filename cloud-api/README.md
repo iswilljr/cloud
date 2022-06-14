@@ -9,7 +9,6 @@ This is the cloud api for cloud and github-clone projects
 - [Scripts](#scripts)
 - [HTTP requests](#http-requests)
 - [HTTP responses](#http-responses)
-- [License](#license)
 
 ## Installation
 

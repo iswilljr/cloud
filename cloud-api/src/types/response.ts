@@ -9,18 +9,12 @@ export type Item = {
 	created: number;
 };
 
-export type HasReadme = {
-	has: true;
-	name: string;
-	content: string;
-};
-
-export type HasNoReadme = {
-	has: false;
-};
-
 export interface Info extends Item {
-	readme: HasReadme | HasNoReadme;
+	readme: {
+		has: boolean;
+		name?: string;
+		content?: string;
+	};
 }
 
 export interface Response {
