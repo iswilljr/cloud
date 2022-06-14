@@ -1,23 +1,5 @@
-import { createStyles } from "@mantine/core";
 import ReactMarkdown from "react-markdown";
-import { Highlight, CopyBtn } from "components";
-
-const useStyles = createStyles(() => ({
-	control: {
-		maxWidth: "1012px",
-		marginRight: "auto !important",
-		marginLeft: "auto !important",
-	},
-	code: {
-		position: "relative",
-		"& > #copy-btn": {
-			opacity: 0,
-		},
-		"&:hover > #copy-btn": {
-			opacity: 1,
-		},
-	},
-}));
+import { Highlight, CopyBtn, useMarkdownStyles as useStyles } from "components";
 
 interface MarkdownProps {
 	markdown: string;
@@ -50,6 +32,12 @@ const Markdown = ({ markdown }: MarkdownProps) => {
 					);
 				},
 				pre: "div",
+				h1: (props) => <Heading component="h1" {...props} />,
+				h2: (props) => <Heading component="h2" {...props} />,
+				h3: (props) => <Heading component="h3" {...props} />,
+				h4: (props) => <Heading component="h4" {...props} />,
+				h5: (props) => <Heading component="h5" {...props} />,
+				h6: (props) => <Heading component="h6" {...props} />,
 			}}
 		>
 			{markdown}
@@ -58,3 +46,15 @@ const Markdown = ({ markdown }: MarkdownProps) => {
 };
 
 export default Markdown;
+
+function Heading({
+	component: H,
+	children,
+	...props
+}: React.HTMLProps<HTMLHeadingElement> & { component: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" }) {
+	return (
+		<H {...props} id={String(children).toLowerCase().replace(/\s/g, "-")}>
+			{children}
+		</H>
+	);
+}

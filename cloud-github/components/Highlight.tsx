@@ -27,9 +27,11 @@ const Highlight = ({
 			lineNumberStyle={{ width: "50px", textAlign: "right", color: "var(--icon-color)", ...styles?.lineNumbers }}
 			customStyle={{ fontSize: "12px", margin: 0, ...styles?.root }}
 			wrapLongLines={wrap}
+			wrapLines={wrap}
 			showLineNumbers={lineNumbers}
 			style={githubTheme}
 			PreTag={preTag}
+			
 		>
 			{code}
 		</SyntaxHighlighter>

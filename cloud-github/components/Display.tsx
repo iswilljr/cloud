@@ -1,35 +1,10 @@
-import { createStyles } from "@mantine/core";
 import Link from "next/link";
 import { useContext } from "react";
 import { FileIcon, FolderIcon } from "@icons";
 import { Item } from "api/Response";
-import { useDefaultStyles } from "components";
+import { useDefaultStyles, useDisplayStyles as useStyles } from "components";
 import { LoadingContext } from "context/loading-context";
 import { getDateAgo } from "utils/get-date-ago";
-
-const useStyles = createStyles((theme) => ({
-	control: {
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "space-between",
-		padding: "8px 16px",
-		height: "38px",
-		maxHeight: "38px",
-		border: "1px solid var(--border-color)",
-		fontSize: "14px",
-		color: "#c9d1d9",
-		"&:hover": {
-			backgroundColor: "var(--background-hover-color)",
-		},
-		"&:last-child": {
-			borderBottomLeftRadius: "6px",
-			borderBottomRightRadius: "6px",
-		},
-	},
-	info: { display: "flex", alignItems: "center", fontSize: "14px", color: "#c9d1d9" },
-	icon: { marginRight: "16px" },
-	modified: { color: "var(--icon-color) !important" },
-}));
 
 interface Styles {
 	name?: React.CSSProperties;
