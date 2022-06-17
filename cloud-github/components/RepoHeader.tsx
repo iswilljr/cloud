@@ -1,4 +1,4 @@
-import { Breadcrumbs, Tooltip } from "@mantine/core";
+import { Breadcrumbs } from "@mantine/core";
 import { Link } from "components";
 import { useContext } from "react";
 import { RepoIcon } from "@icons";

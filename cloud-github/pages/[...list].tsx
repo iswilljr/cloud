@@ -1,18 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
 import { CommitIcon, EditIcon } from "@icons";
 import { ListProps } from "api/Response";
 import { useDefaultStyles, useListStyles, Button, Display, Markdown, Error } from "components";
-import { LoadingContext } from "context/loading-context";
 import { getDateAgo } from "utils/get-date-ago";
 import { buttons } from "utils/repo-files-buttons";
 import { createServerSideProps } from "utils/get-server-side-props";
 
 const Home = ({ pathname, response }: ListProps) => {
-	const { classes, cx } = useListStyles();
+	const { classes } = useListStyles();
 	const { defaultClasses } = useDefaultStyles();
-	const { isLoading, setIsLoading } = useContext(LoadingContext);
 
 	return response.success ? (
 		<>
@@ -73,9 +70,8 @@ const Home = ({ pathname, response }: ListProps) => {
 						<div
 							className="markdown-body"
 							style={{ maxWidth: "1012px", marginRight: "auto", marginLeft: "auto" }}
-							dangerouslySetInnerHTML={{__html:response.info.readme.content}}
-						>
-						</div>
+							dangerouslySetInnerHTML={{ __html: response.info.readme.content }}
+						></div>
 					</div>
 				</div>
 			)}

@@ -5,7 +5,7 @@ import { CheckIcon, CopyIcon, EditIcon } from "@icons";
 import { createServerSideProps } from "utils/get-server-side-props";
 
 const Blob = ({ pathname, response }: BlobProps) => {
-	const { classes, cx } = useStyles();
+	const { classes } = useStyles();
 	const clipboard = useClipboard();
 
 	return response.success ? (
