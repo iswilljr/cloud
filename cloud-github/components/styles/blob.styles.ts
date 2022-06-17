@@ -35,7 +35,13 @@ export const useBlobStyles = createStyles((theme) => ({
 	},
 	icons: { display: "flex", alignItems: "center" },
 	icon: { margin: "0 8px", cursor: "pointer", "&:hover svg:not(#copied)": { fill: "var(--link-color)" } },
-	fileContent: { borderBottomLeftRadius: "6px", borderBottomRightRadius: "6px", padding: 0, userSelect: "text", overflowX:"auto" },
+	fileContent: {
+		borderBottomLeftRadius: "6px",
+		borderBottomRightRadius: "6px",
+		padding: 0,
+		userSelect: "text",
+		overflowX: "auto",
+	},
 	markdownPadding: { padding: "40px" },
 	fileInfo: {
 		borderBottomLeftRadius: "6px",

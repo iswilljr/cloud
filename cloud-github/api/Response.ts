@@ -23,10 +23,17 @@ export interface ListInfo extends Item {
 	readme: { has: false } | { has: true; name: string; content: string };
 }
 
+interface TypeFile {
+	type: "file" | "markdown";
+	data: string;
+	lines: number;
+	code: string;
+}
+
 interface ResponseBase {
 	success: true;
 	path: string;
-	content: TypeDirectories | { type: "file" | "media" | "markdown"; data: string; language?: string };
+	content: TypeDirectories | TypeFile | { type: "media"; data: string };
 }
 
 export interface List extends ResponseBase {

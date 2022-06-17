@@ -12,13 +12,13 @@ import {
 
 
 export const buttons = [
-	{ icon: CodeIcon, label: "Code", href: "#code", selected: true, showOnMdScreen: true },
-	{ icon: IssuesIcon, label: "Issues", href: "#issues", showOnMdScreen: true },
-	{ icon: PullIcon, label: "Pull requests", href: "#pull", showOnMdScreen: true },
-	{ icon: ActionsIcon, label: "Actions", href: "#actions", showOnMdScreen: false },
-	{ icon: ProjectsIcon, label: "Projects", href: "#projects", showOnMdScreen: false },
-	{ icon: WikiIcon, label: "Wiki", href: "#wiki", showOnMdScreen: false },
-	{ icon: SecurityIcon, label: "Security", href: "#security", showOnMdScreen: false },
-	{ icon: InsightsIcon, label: "Insights", href: "#insights", showOnMdScreen: false },
-	{ icon: SettingsIcon, label: "Settings", href: "#settings", showOnMdScreen: true },
+	{ icon: CodeIcon, label: "Code", href: "#code", selected: true, shouldHideOnMd: false },
+	{ icon: IssuesIcon, label: "Issues", href: "#issues", shouldHideOnMd: true },
+	{ icon: PullIcon, label: "Pull requests", href: "#pull", shouldHideOnMd: true },
+	{ icon: ActionsIcon, label: "Actions", href: "#actions", shouldHideOnMd: true },
+	{ icon: ProjectsIcon, label: "Projects", href: "#projects", shouldHideOnMd: true },
+	{ icon: WikiIcon, label: "Wiki", href: "#wiki", shouldHideOnMd: true },
+	{ icon: SecurityIcon, label: "Security", href: "#security", shouldHideOnMd: true },
+	{ icon: InsightsIcon, label: "Insights", href: "#insights", shouldHideOnMd: true },
+	{ icon: SettingsIcon, label: "Settings", href: "#settings", shouldHideOnMd: false },
 ];

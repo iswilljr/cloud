@@ -27,7 +27,7 @@ export const useLayoutStyles = createStyles((theme) => ({
 export const AppShellStyle: React.CSSProperties = { backgroundColor };
 
 export const AppShellStyles: Record<"body" | "main" | "root", CSSObject> = {
-	body: { backgroundColor },
+	body: { backgroundColor, overflowX: "hidden" },
 	main: { backgroundColor },
 	root: { backgroundColor },
 };

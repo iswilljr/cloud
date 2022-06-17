@@ -1,12 +1,13 @@
-import { MediaQuery, UnstyledButton } from "@mantine/core";
+/* eslint-disable jsx-a11y/alt-text */
+import { MediaQuery } from "@mantine/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { wrappers } from "utils/images";
 import Button from "./Button";
 
 const Error = () => {
-
-	const router = useRouter()
+	const router = useRouter();
 
 	return (
 		<div style={{ display: "flex", flex: "auto", flexDirection: "column" }}>
@@ -29,30 +30,17 @@ const Error = () => {
 					</div>
 					<MediaQuery smallerThan="sm" styles={{ display: "none" }}>
 						<div>
-							<div style={{ zIndex: 9, top: 94, left: 356, position: "absolute" }}>
-								<Image width={188} height={230} src="/avatar.png" alt="" />
-							</div>
-							<div style={{ zIndex: 8, top: 150, left: 432, position: "absolute" }}>
-								<Image width={440} height={156} src="/boat.png" alt="" />
-							</div>
-							<div style={{ zIndex: 7, top: 297, left: 371, position: "absolute" }}>
-								<Image width={166} height={49} src="/avatar-shadow.png" alt="" />
-							</div>
-							<div style={{ zIndex: 6, top: 263, left: 442, position: "absolute" }}>
-								<Image width={430} height={75} src="/boat-shadow.png" alt="" />
-							</div>
-							<div style={{ zIndex: 5, top: 73, left: 467, position: "absolute" }}>
-								<Image width={304} height={123} src="/1.png" alt="" />
-							</div>
-							<div style={{ zIndex: 4, top: 113, left: 762, position: "absolute" }}>
-								<Image width={116} height={50} src="/2.png" alt="" />
-							</div>
+							{wrappers.map((wrapper, index) => (
+								<div key={index} style={wrapper.style}>
+									<Image {...wrapper.image} />
+								</div>
+							))}
 						</div>
 					</MediaQuery>
 				</div>
 			</main>
 			<div style={{ margin: "32px auto" }}>
-				<Button onClick={()=>router.replace("/home")} label="Go Home" styleButton style={{ fontSize: "16px" }}></Button>
+				<Button onClick={() => router.replace("/home")} label="Go Home" styleButton style={{ fontSize: "16px" }} />
 			</div>
 		</div>
 	);

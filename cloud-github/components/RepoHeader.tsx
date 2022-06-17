@@ -41,7 +41,13 @@ const Header = ({ pathname }: { pathname: string }) => {
 				</div>
 				<div className={classes.topRight}>
 					{repoButtons.map((button) => (
-						<Button label={button.label} styleButton icon={button.icon} key={button.label} />
+						<Button
+							key={button.label}
+							label={button.label}
+							shouldHideOnMd={button.shouldHideOnMd}
+							styleButton
+							icon={button.icon}
+						/>
 					))}
 				</div>
 			</div>
@@ -53,7 +59,7 @@ const Header = ({ pathname }: { pathname: string }) => {
 							className={cx(
 								classes.li,
 								button?.selected ? classes.selected : "",
-								button.showOnMdScreen ? "" : defaultClasses.hidden
+								button.shouldHideOnMd ? defaultClasses.hidden : ""
 							)}
 						>
 							<a className={cx(classes.a)} href={button.href}>

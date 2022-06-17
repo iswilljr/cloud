@@ -1,40 +1,20 @@
-import SyntaxHighlighter from "react-syntax-highlighter";
-import githubTheme from "styles/markdown/github-dark";
-
 interface HighlightProps {
-	code: string | string[];
-	wrap?: boolean;
-	lineNumbers?: boolean;
-	language?: string;
-	styles?: {
-		lineNumbers?: React.CSSProperties;
-		root?: React.CSSProperties;
-	};
-	preTag?: keyof JSX.IntrinsicElements;
+	code: string;
+	lines: number;
 }
 
-const Highlight = ({
-	code,
-	language = "javascript",
-	lineNumbers = false,
-	wrap = false,
-	styles,
-	preTag,
-}: HighlightProps) => {
+const Highlight = ({ code, lines }: HighlightProps) => {
 	return (
-		<SyntaxHighlighter
-			language={language}
-			lineNumberStyle={{ width: "50px", textAlign: "right", color: "var(--icon-color)", ...styles?.lineNumbers }}
-			customStyle={{ fontSize: "12px", margin: 0, ...styles?.root }}
-			wrapLongLines={wrap}
-			wrapLines={wrap}
-			showLineNumbers={lineNumbers}
-			style={githubTheme}
-			PreTag={preTag}
-			
-		>
-			{code}
-		</SyntaxHighlighter>
+		<div style={{ display: "flex", overflowY: "hidden" }}>
+			<div className="lines" style={{ userSelect: "none" }}>
+				{[...Array(lines)].map((_, i) => (
+					<div key={i} className="line" style={{ width: 50, height: 19.72, fontSize: 12, textAlign: "right", color: "#6e7181" }}>
+						{i + 1}
+					</div>
+				))}
+			</div>
+			<div className="markdown-body bg" dangerouslySetInnerHTML={{ __html: code }}></div>
+		</div>
 	);
 };
 

@@ -14,13 +14,6 @@ const Home = ({ pathname, response }: ListProps) => {
 	const { defaultClasses } = useDefaultStyles();
 	const { isLoading, setIsLoading } = useContext(LoadingContext);
 
-	console.log({ pathname, response });
-
-	useEffect(() => {
-		if (isLoading) setIsLoading(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pathname]);
-
 	return response.success ? (
 		<>
 			<div className={classes.fileNav}>
@@ -40,7 +33,7 @@ const Home = ({ pathname, response }: ListProps) => {
 						/>
 						<div className={classes.moreDetails}>iswilljr</div>
 						<div className={classes.commits}>
-							<strong style={{ marginRight: "15px", color: "var(--icon-color)" }}>
+							<strong className={defaultClasses.hidden} style={{ marginRight: "15px", color: "var(--icon-color)" }}>
 								{`Last modified ${getDateAgo(response.info.modified)}`}
 							</strong>
 							<CommitIcon width="16" height="16" fill="var(--text-color)" />
@@ -67,7 +60,7 @@ const Home = ({ pathname, response }: ListProps) => {
 				<div className={classes.markdown} id="readme">
 					<div className={classes.markdownHeader}>
 						<div className={classes.markdownTitle}>
-							<Link href={`/home${pathname}${pathname.endsWith("/") ? "" : "/"}${response.info.readme.name}`}>
+							<Link href={`/blob${pathname}${pathname.endsWith("/") ? "" : "/"}${response.info.readme.name}`}>
 								<a className={defaultClasses.anchor}>README.md</a>
 							</Link>
 						</div>
@@ -77,11 +70,19 @@ const Home = ({ pathname, response }: ListProps) => {
 					</div>
 					<div className={classes.markdownContent}>
 						<Markdown markdown={response.info.readme.content} />
+						<div
+							className="markdown-body"
+							style={{ maxWidth: "1012px", marginRight: "auto", marginLeft: "auto" }}
+							dangerouslySetInnerHTML={{__html:response.info.readme.content}}
+						>
+						</div>
 					</div>
 				</div>
 			)}
 		</>
-	) : <Error />
+	) : (
+		<Error />
+	);
 };
 
 export const getServerSideProps = createServerSideProps({ type: "list" });

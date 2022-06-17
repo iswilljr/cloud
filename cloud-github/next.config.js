@@ -1,8 +1,5 @@
-const withTM = require("next-transpile-modules");
-const withPlugins = require("next-compose-plugins");
-
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
 	reactStrictMode: true,
 	images: {
 		domains: ["avatars.githubusercontent.com"],
@@ -11,8 +8,3 @@ const nextConfig = {
 		return [{ source: "/", destination: "/home", permanent: true }];
 	},
 };
-
-module.exports = withPlugins(
-	[[withTM(["react-syntax-highlighter"]), { transpileModules: ["react-syntax-highlighter"] }]],
-	nextConfig
-);

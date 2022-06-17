@@ -8,8 +8,6 @@ const Blob = ({ pathname, response }: BlobProps) => {
 	const { classes, cx } = useStyles();
 	const clipboard = useClipboard();
 
-	console.log({ response });
-
 	return response.success ? (
 		<>
 			{response.content.type !== "directory" && (
@@ -21,7 +19,10 @@ const Blob = ({ pathname, response }: BlobProps) => {
 							{response.info.size}
 						</div>
 						<div className={classes.icons}>
-							<span className={classes.icon} onClick={() => clipboard.copy(response.content.data)}>
+							<span
+								className={classes.icon}
+								onClick={() => clipboard.copy(response.content.type === "file" ? response.content.code : "")}
+							>
 								{clipboard.copied ? (
 									<CheckIcon fill="var(--succes-color)" id="copied" />
 								) : (
@@ -36,15 +37,8 @@ const Blob = ({ pathname, response }: BlobProps) => {
 					<div className={classes.fileContent}>
 						{response.content.type === "file" && (
 							<Highlight
-								language={response.content.language ?? undefined}
-								styles={{
-									root: {
-										borderBottomLeftRadius: "6px",
-										borderBottomRightRadius: "6px",
-									},
-								}}
 								code={response.content.data.replace(/\t/g, "  ")}
-								lineNumbers
+								lines={response.content.lines ?? response.content.data.replace(/\n$/g, "").split("\n").length}
 							/>
 						)}
 						{response.content.type === "markdown" && (
@@ -52,11 +46,21 @@ const Blob = ({ pathname, response }: BlobProps) => {
 								<Markdown markdown={response.content.data} />
 							</div>
 						)}
+						{response.content.type === "media" && (
+							<div
+								className=""
+								style={{ padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}
+							>
+								This file can&apos;t be display
+							</div>
+						)}
 					</div>
 				</div>
 			)}
 		</>
-	) : <Error />
+	) : (
+		<Error />
+	);
 };
 
 export const getServerSideProps = createServerSideProps({ type: "blob" });
