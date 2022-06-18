@@ -1,21 +1,20 @@
 import fs from "fs/promises";
-import { join as joinPaths } from "path";
+import { join as joinPaths, basename } from "path";
 import { IGNORE } from "./constants";
 
-/**
- * It recursively traverses a directory and returns the total size of all files in the directory
- * @param rootItemPath - The path to the root item to get the size of.
- * @param ignore - A regular expression that will be used to ignore files and folders.
- * @returns The size of the folder in bytes.
- */
-async function core(rootItemPath: string, ignore: RegExp): Promise<number> {
+interface Options {
+	ignore?: RegExp;
+	ignoreFn?: (itemPath: string) => boolean;
+}
+
+async function core(rootItemPath: string, { ignore, ignoreFn }: Options): Promise<number> {
 	const fileSizes = new Map();
 	const errors = [];
 
 	await processItem(rootItemPath);
 
 	async function processItem(itemPath: string) {
-		if (ignore?.test?.(itemPath)) return;
+		if (ignore?.test(itemPath) || ignoreFn?.(itemPath)) return;
 		const stats = await fs.lstat(itemPath).catch((error) => errors.push(error));
 		if (typeof stats !== "object") return;
 		fileSizes.set(stats.ino, stats.size);
@@ -29,4 +28,8 @@ async function core(rootItemPath: string, ignore: RegExp): Promise<number> {
 	return folderSize;
 }
 
-export default async (path: string) => await core(path, IGNORE);
+export default (path: string) =>
+	core(path, {
+		ignore: IGNORE,
+		ignoreFn: (itemPath) => basename(itemPath).startsWith("."),
+	});

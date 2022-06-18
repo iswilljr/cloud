@@ -1,61 +1,52 @@
 import { config } from "dotenv";
 import path from "path";
+import colors from "colors";
 import fs from "fs/promises";
+import { clearAndWrite, prompt } from "./lib/setup";
 config();
 
 const HOME_CLOUD_STORAGE = process.env.HOME_CLOUD_STORAGE;
+const TOKEN = process.env.TOKEN;
 
-const setStorage = () => {
-	let storage = "";
-	process.stdout.write("\x1BcIngrese la ruta de almacenamiento: ");
-	process.stdin.on("data", (d) => {
-		const data = d.toString().trim();
-		if (data.length && path.isAbsolute(data)) {
-			fs.access(data)
-				.then(() => {
-					storage = data;
-					process.stdin.emit("end");
-				})
-				.catch(() => {
-					process.stdout.write("Ruta no encontrada, ingrese una correcta: ");
-				});
-		} else process.stdout.write("Ingrese una ruta válida: ");
-	});
-	process.stdin.resume();
-	process.stdin.on("end", () => {
-		if (!storage) {
-			console.log("No se ingreso ninguna ruta de almacenamiento");
-			process.exit(1);
-		}
-		fs.writeFile(path.join(__dirname, "../.env"), `HOME_CLOUD_STORAGE=${storage}`, "utf-8")
-			.then(() => {
-				console.log("Se ha creado el archivo de configuración");
-				console.log("Ruta de almacenamiento:", storage);
-				console.log("Para iniciar el servidor, ejecute 'npm run start'");
-				process.exit(0);
-			})
-			.catch(() => {
-				console.log("No se pudo crear el archivo de configuración");
-				process.exit(1);
+const startServerLog = `To start the server, run ${colors.cyan("yarn start")}`;
+
+const setEnvVariables = async () => {
+	const storage = await prompt("Enter your storage path: ", {
+		noDataMsg: "Enter a valid path: ",
+		validateErrorMsg: "Path not found, enter a valid path: ",
+		validate(data) {
+			return new Promise((resolve) => {
+				if (!path.isAbsolute(data)) resolve(false);
+				else
+					fs.access(data)
+						.then(() => resolve(true))
+						.catch(() => resolve(false));
 			});
+		},
 	});
+	const token = await prompt("Enter your token: ", { validate: () => true });
+
+	const storageKey = `HOME_CLOUD_STORAGE=${storage.replace(/\/$/, "")}`;
+	const tokenKey = `TOKEN=${token}`;
+
+	await fs.writeFile(path.join(__dirname, "../.env"), `${storageKey}\n${tokenKey}\n`, "utf-8");
+	console.log(
+		`Storage path set to: ${colors.cyan(storage)}\n${colors.green("Token set successfully!")}\n${startServerLog}`
+	);
+	process.exit(0);
 };
 
-if (!HOME_CLOUD_STORAGE) {
-	setStorage();
-} else {
-	console.log("\x1BcRuta de almacenamiento:", HOME_CLOUD_STORAGE);
-	process.stdout.write("¿Desea cambiar la ruta de almacenamiento? (s/n): ");
-	const setdata = (d: Buffer) => {
-		const data = d.toString().trim();
-		if (data === "s") {
-			process.stdin.emit("end");
-			process.stdin.removeListener("data", setdata);
-			setStorage();
-		} else {
-			console.log("Para iniciar el servidor, ejecute 'npm run start'");
+if (!HOME_CLOUD_STORAGE && !TOKEN) setEnvVariables();
+else {
+	(async () => {
+		clearAndWrite(`Storage path: ${colors.green(HOME_CLOUD_STORAGE ?? "")}\nToken is set`);
+		const overwrite = await prompt("\nDo you want to overwrite the token? (y/n): ", {
+			validate: (data) => data === "y" || data === "n",
+		});
+		if (overwrite === "y") setEnvVariables();
+		else {
+			console.log(`${startServerLog}`);
 			process.exit(0);
 		}
-	};
-	process.stdin.on("data", setdata);
+	})();
 }

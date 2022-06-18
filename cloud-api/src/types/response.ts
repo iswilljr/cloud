@@ -23,6 +23,8 @@ export interface Response {
 	content?: {
 		type: "file" | "markdown" | "media" | "directory";
 		data: string | { files: Item[]; directories: Item[] };
+		lines?: number;
+		code?: string;
 	};
 }
 

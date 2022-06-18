@@ -1,5 +1,5 @@
 import path from "path";
-import storage from "../storage";
+import { storage } from "../variables";
 
 function removeLastSeparator(path: string) {
 	return path.length > 1 ? path.replace(/\/$/, "") : path;

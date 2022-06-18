@@ -15,7 +15,7 @@ describe("Blob endpoint", () => {
 		expect(res.body.path).toEqual(TEST_PATH_TXT);
 		expect(res.body.info.isFile).toEqual(true);
 		expect(res.body.content.type).toEqual("file");
-		expect(res.body.content.data).toEqual("ok\n");
+		expect(res.body.content.data).toContain("ok");
 	});
 	it("should read test file", async () => {
 		const res = await request(app).get(`/blob${TEST_PATH_MD}`);
@@ -24,7 +24,7 @@ describe("Blob endpoint", () => {
 		expect(res.body.path).toEqual(TEST_PATH_MD);
 		expect(res.body.info.isFile).toEqual(true);
 		expect(res.body.content.type).toEqual("markdown");
-		expect(res.body.content.data).toEqual("# test\n");
+		expect(res.body.content.data).toContain("test");
 	});
 	it("should be a 400 request", async () => {
 		const res = await request(app).get("/blob/i-hope-this-path-does-not-exist-and-will-cause-a-400");
