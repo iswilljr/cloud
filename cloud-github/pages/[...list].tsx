@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CommitIcon, EditIcon } from "@icons";
 import { ListProps } from "api/Response";
-import { useDefaultStyles, useListStyles, Button, Display, Markdown, Error } from "components";
+import { useDefaultStyles, Button, Display, Markdown, Error } from "components";
 import { getDateAgo } from "utils/get-date-ago";
 import { buttons } from "utils/repo-files-buttons";
 import { createServerSideProps } from "utils/get-server-side-props";
+import { CommitIcon, EditIcon } from "@icons";
+import useStyles from "components/list.styles";
 
 const Home = ({ pathname, response }: ListProps) => {
-	const { classes } = useListStyles();
+	const { classes } = useStyles();
 	const { defaultClasses } = useDefaultStyles();
 
 	return response.success ? (
@@ -44,7 +45,9 @@ const Home = ({ pathname, response }: ListProps) => {
 							<Display
 								name=".."
 								path={`${pathname}/..`}
-								styles={{ name: { color: "var(--link-color)", textDecoration: "none", fontSize: "18px" } }}
+								styles={{
+									name: { color: "var(--link-color)", textDecoration: "none", fontSize: "18px" },
+								}}
 							/>
 						)}
 						{[...response.content.data.directories, ...response.content.data.files].map((item) => (
@@ -71,7 +74,7 @@ const Home = ({ pathname, response }: ListProps) => {
 							className="markdown-body"
 							style={{ maxWidth: "1012px", marginRight: "auto", marginLeft: "auto" }}
 							dangerouslySetInnerHTML={{ __html: response.info.readme.content }}
-						></div>
+						/>
 					</div>
 				</div>
 			)}

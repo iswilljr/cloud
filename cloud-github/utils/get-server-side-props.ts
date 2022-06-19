@@ -6,15 +6,10 @@ interface Options {
 	type: "list" | "blob";
 }
 
-export const createServerSideProps = ({ type }: Options): GetServerSideProps => {
-	return async (ctx) => {
+export const createServerSideProps =
+	({ type }: Options): GetServerSideProps =>
+	async (ctx) => {
 		const pathname = getPath(ctx.query?.[type], type === "list");
-		let response;
-		try {
-			response = await (type === "list" ? getList(pathname) : getBlob(pathname));
-		} catch (error) {
-			response = error;
-		}
+		const response = await (type === "list" ? getList(pathname) : getBlob(pathname));
 		return { props: { pathname, response, type } };
 	};
-};

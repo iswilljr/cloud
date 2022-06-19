@@ -1,28 +1,24 @@
 import { AppShell } from "@mantine/core";
-import { ListProps, BlobProps } from "api/Response";
-import { Header, RepoHeader, Aside, useLayoutStyles as useStyles, AppShellStyle, AppShellStyles } from "components";
+import { BlobProps, ListProps } from "api/Response";
+import { Repo, Aside } from "components";
+import Header from "../Header/Header";
+import useStyles from "./Layout.styles";
 
 interface LayoutProps {
-	app: ListProps | BlobProps;
 	children: React.ReactNode;
+	app: ListProps | BlobProps;
 }
 
 export default function Layout({ children, app: { pathname, response, type } }: LayoutProps) {
-	const { classes, cx } = useStyles();
+	const { cx, classes } = useStyles();
 	const hide = !response.success || type === "blob";
 
 	return (
-		<AppShell
-			className={classes.control}
-			style={AppShellStyle}
-			styles={AppShellStyles}
-			padding={0}
-			header={<Header />}
-		>
-			<main className={classes.app}>
+		<AppShell className={classes.control} header={<Header />} padding={0}>
+			<div className={classes.app}>
 				{response.success ? (
 					<>
-						<RepoHeader pathname={pathname} />
+						<Repo pathname={pathname} />
 						<div className={classes.repo}>
 							<div className={cx(classes.grid, hide ? classes.gridFull : "")}>
 								<div className={cx(classes.main, hide ? classes.full : "")}>{children}</div>
@@ -33,7 +29,7 @@ export default function Layout({ children, app: { pathname, response, type } }: 
 				) : (
 					children
 				)}
-			</main>
+			</div>
 		</AppShell>
 	);
 }

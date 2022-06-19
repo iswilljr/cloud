@@ -1,11 +1,12 @@
 import { BlobProps } from "api/Response";
-import { Error, Highlight, Markdown, useBlobStyles as useStyles } from "components";
+import { Error, Highlight, Markdown } from "components";
 import { useClipboard } from "@mantine/hooks";
 import { CheckIcon, CopyIcon, EditIcon } from "@icons";
 import { createServerSideProps } from "utils/get-server-side-props";
+import useStyles from "components/blob.styles";
 
-const Blob = ({ pathname, response }: BlobProps) => {
-	const { classes } = useStyles();
+const Blob = ({ response }: BlobProps) => {
+	const { cx, classes } = useStyles();
 	const clipboard = useClipboard();
 
 	return response.success ? (
@@ -15,20 +16,27 @@ const Blob = ({ pathname, response }: BlobProps) => {
 					<div className={classes.fileHeader}>
 						<div className={classes.info}>
 							{response.content.data.split("\n").length} lines
-							<span className={classes.divider}></span>
+							<span className={classes.divider} />
 							{response.info.size}
 						</div>
 						<div className={classes.icons}>
-							<span
-								className={classes.icon}
-								onClick={() => clipboard.copy(response.content.type === "file" ? response.content.code : "")}
+							<button
+								className={cx(classes.icon, classes.copyBtn)}
+								onClick={() =>
+									clipboard.copy(
+										response.content.type !== "media" && response.content.type !== "directory"
+											? response.content.code
+											: ""
+									)
+								}
+								type="button"
 							>
 								{clipboard.copied ? (
 									<CheckIcon fill="var(--succes-color)" id="copied" />
 								) : (
 									<CopyIcon fill="var(--icon-color)" />
 								)}
-							</span>
+							</button>
 							<span className={classes.icon}>
 								<EditIcon fill="var(--icon-color)" />
 							</span>
@@ -49,7 +57,12 @@ const Blob = ({ pathname, response }: BlobProps) => {
 						{response.content.type === "media" && (
 							<div
 								className=""
-								style={{ padding: 16, display: "flex", alignItems: "center", justifyContent: "center" }}
+								style={{
+									padding: 16,
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+								}}
 							>
 								This file can&apos;t be display
 							</div>

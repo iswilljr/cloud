@@ -10,7 +10,6 @@ import {
 	WikiIcon,
 } from "@icons";
 
-
 export const buttons = [
 	{ icon: CodeIcon, label: "Code", href: "#code", selected: true, shouldHideOnMd: false },
 	{ icon: IssuesIcon, label: "Issues", href: "#issues", shouldHideOnMd: true },

@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useBlobStyles = createStyles((theme) => ({
+export default createStyles(() => ({
 	file: {
 		marginTop: "16px",
 		position: "relative",
@@ -34,7 +34,11 @@ export const useBlobStyles = createStyles((theme) => ({
 		margin: "0 16px",
 	},
 	icons: { display: "flex", alignItems: "center" },
-	icon: { margin: "0 8px", cursor: "pointer", "&:hover svg:not(#copied)": { fill: "var(--link-color)" } },
+	icon: {
+		margin: "0 8px",
+		cursor: "pointer",
+		"&:hover svg:not(#copied)": { fill: "var(--link-color)" },
+	},
 	fileContent: {
 		borderBottomLeftRadius: "6px",
 		borderBottomRightRadius: "6px",
@@ -49,5 +53,8 @@ export const useBlobStyles = createStyles((theme) => ({
 		padding: "16px",
 		fontSize: "14px",
 		color: "#c9d1d9",
+	},
+	copyBtn: {
+		all: "unset",
 	},
 }));

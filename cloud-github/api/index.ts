@@ -7,7 +7,7 @@ async function apiCall<T>(request: () => Promise<AxiosResponse<T>>): Promise<T> 
 	try {
 		return (await request()).data;
 	} catch (e: any) {
-		return e.data;
+		return e.data || { success: false, message: "Something went wrong" };
 	}
 }
 

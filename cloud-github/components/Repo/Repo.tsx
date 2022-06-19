@@ -1,17 +1,17 @@
 import { Breadcrumbs } from "@mantine/core";
-import { Link } from "components";
 import { useContext } from "react";
 import { RepoIcon } from "@icons";
 import { buttons as repoButtons } from "utils/repo-header-buttons";
 import { buttons as navButtons } from "utils/repo-nav-buttons";
-import { Button, useDefaultStyles, useRepoStyles as useStyles, BreadcrumbsStyles } from "components";
+import { Button, useDefaultStyles, Link } from "components";
 import { LoadingContext } from "context/loading-context";
+import useStyles from "./Repo.styles";
 
-const Header = ({ pathname }: { pathname: string }) => {
+const Repo = ({ pathname }: { pathname: string }) => {
 	const { classes, cx } = useStyles();
 	const { defaultClasses } = useDefaultStyles();
 	const context = useContext(LoadingContext);
-	const paths = ("/home" + pathname).split(/\/+/g).filter(Boolean);
+	const paths = `/home${pathname}`.split(/\/+/g).filter(Boolean);
 	const basePath = `/home${pathname}${pathname.endsWith("/") ? "" : "/"}`;
 
 	return (
@@ -19,7 +19,20 @@ const Header = ({ pathname }: { pathname: string }) => {
 			<div className={classes.top}>
 				<div className={classes.topLeft}>
 					<RepoIcon className={classes.icon} width="16" height="16" fill="var(--icon-color)" />
-					<Breadcrumbs styles={BreadcrumbsStyles}>
+					<Breadcrumbs
+						styles={{
+							separator: { margin: "0 4px", fontSize: "20px", color: "var(--icon-color)" },
+							breadcrumb: {
+								color: "var(--link-color) !important",
+								fontSize: "20px !important",
+								maxWidth: "150px",
+								whiteSpace: "nowrap",
+								overflow: "hidden",
+								textOverflow: "ellipsis",
+							},
+							root: { marginRight: "4px" },
+						}}
+					>
 						{paths.map((item, i, a) => {
 							const href = `${basePath}${"../".repeat(a.length - i - 1)}`;
 							return (
@@ -74,4 +87,4 @@ const Header = ({ pathname }: { pathname: string }) => {
 	);
 };
 
-export default Header;
+export default Repo;

@@ -50,7 +50,13 @@ export const buttons: (Button | "divider")[] = [
 		dropdownIcon: true,
 		dropdownColor: "#fff",
 		styleButton: true,
-		style: { fontSize: "14px", padding: "8px 12px", height: "32px", background: "var(--succes-color)", color: "#fff" },
+		style: {
+			fontSize: "14px",
+			padding: "8px 12px",
+			height: "32px",
+			background: "var(--succes-color)",
+			color: "#fff",
+		},
 		shouldHideOnMd: false,
 	},
 ];

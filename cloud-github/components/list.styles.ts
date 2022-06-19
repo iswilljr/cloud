@@ -1,6 +1,6 @@
 import { createStyles } from "@mantine/core";
 
-export const useListStyles = createStyles((theme) => ({
+export default createStyles(() => ({
 	fileNav: { display: "flex", alignItems: "start", marginBottom: "16px" },
 	box: {
 		marginBottom: "16px",
@@ -19,7 +19,13 @@ export const useListStyles = createStyles((theme) => ({
 	},
 	headerDetails: { display: "flex", alignItems: "center" },
 	avatar: { backgroundColor: "transparent !important", borderRadius: "9999px" },
-	moreDetails: { display: "flex", alignItems: "center", marginLeft: "16px", fontWeight: "bold", flex: 1 },
+	moreDetails: {
+		display: "flex",
+		alignItems: "center",
+		marginLeft: "16px",
+		fontWeight: "bold",
+		flex: 1,
+	},
 	commits: {
 		color: "var(--text-color)",
 		fontSize: "14px",
@@ -49,5 +55,9 @@ export const useListStyles = createStyles((theme) => ({
 	},
 	markdownTitle: { flex: 1, fontWeight: "bold" },
 	markdownEdit: { cursor: "pointer", "&:hover svg": { fill: "var(--link-color)" } },
-	markdownContent: { padding: "16px 32px 32px", borderBottomLeftRadius: "6px", borderBottomRightRadius: "6px" },
+	markdownContent: {
+		padding: "16px 32px 32px",
+		borderBottomLeftRadius: "6px",
+		borderBottomRightRadius: "6px",
+	},
 }));

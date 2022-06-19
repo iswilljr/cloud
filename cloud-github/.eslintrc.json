@@ -1,3 +1,10 @@
 {
-  "extends": "next/core-web-vitals"
+	"extends": ["mantine", "plugin:@next/next/recommended", "prettier"],
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"@typescript-eslint/no-unused-vars": "error"
+	}
 }

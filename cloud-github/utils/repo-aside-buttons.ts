@@ -1,4 +1,4 @@
-import { ForkIcon, PinIcon, ReadmeIcon, StarIcon, WatchIcon } from "@icons";
+import { ForkIcon, ReadmeIcon, StarIcon, WatchIcon } from "@icons";
 
 export const buttons = [
 	{ icon: ReadmeIcon, label: "Readme", href: "#readme" },
