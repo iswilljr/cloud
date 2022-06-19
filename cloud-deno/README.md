@@ -1,25 +1,13 @@
 # HOME CLOUD
 
-## SETUP HOME CLOUD
+you can setup this home cloud (with deno interface) seeing the repo [cloud-setup](https://github.com/iswilljr/cloud-setup)
+
+## Getting Started
+
+First, run the development server:
 
 ```bash
-mkdir cloud # create cloud directory
-cd cloud
-git clone https://github.com/iswilljr/home-files-and-folder-reader-api server
-cd server
-npm i # or yarn
-npm run tsc && npm run setup
-cd ..
-git clone https://github.com/iswilljr/cloud home-cloud # clone cloud repository
-cd home-cloud
-npm i # or yarn
-```
-## START HOME CLOUD
-
-```bash
-cd server
-npm start # or yarn start
-cd ..
-cd home-cloud
-npm run dev # or yarn dev
+yarn dev
+# or
+npm run dev
 ```
