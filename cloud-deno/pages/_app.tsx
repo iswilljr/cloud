@@ -1,15 +1,47 @@
 import "styles/globals.css";
-import "styles/markdown/github-markdown-light.css"
-import "styles/markdown/github.css"
+import "styles/github-markdown-light.css";
 import type { AppProps } from "next/app";
-import { Provider } from "react-redux";
-import { store } from "app/store";
+import Head from "next/head";
+import Header from "components/Header";
+import Tree from "components/Tree";
+import Info from "components/Info";
+import { useEffect, useState } from "react";
+import { LoadingContext } from "context/loading-context";
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const [isLoading, setIsLoading] = useState(false);
+
+	const pathname = pageProps.pathname ?? "/";
+
+	useEffect(() => setIsLoading(false), [pathname]);
+
 	return (
-		<Provider store={store}>
-			<Component {...pageProps} />
-		</Provider>
+		<>
+			<Head>
+				<title>{`Deno - ${pathname}`}</title>
+				<meta name="description" content="Home cloud" />
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
+			{isLoading && (
+				<div className="fixed w-full">
+					<progress className="absolute top-0 linear-progress w-full" />
+				</div>
+			)}
+			<Header />
+			<main className="app">
+				<Tree pathname={pathname} />
+				<div className="app-main">
+					<div className="app-content">
+						<div className="app-display">
+							<LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+								<Component {...pageProps} />
+							</LoadingContext.Provider>
+						</div>
+					</div>
+					<Info info={pageProps.response?.info} />
+				</div>
+			</main>
+		</>
 	);
 }
 

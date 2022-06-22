@@ -1,20 +1,17 @@
 import { CalendarIcon, FolderOpenIcon, StarIcon } from "@heroicons/react/solid";
-import { selectInfo } from "app/appSlice";
-import { useAppSelector } from "app/hooks";
-import Moment from "react-moment";
+import { BlobInfo, ListInfo } from "api/Response";
+import { getDateAgo } from "utils/get-date-ago";
 
-const Info = () => {
-	const dirInfo = useAppSelector(selectInfo);
-
+const Info = ({ info }: { info?: ListInfo | BlobInfo }) => {
 	return (
-		<div className="relative sm:static row-start-1 md:row-start-auto">
-			<div className="sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4">
-				<div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 overflow-hidden">
+		<div className="info">
+			<div className="info-content">
+				<div className="info-card overflow-hidden">
 					<div className="bg-gray-50 p-4">
-						<div className="text-xl font-bold uppercase">Home Clud{dirInfo?.name && ` - ${dirInfo.name}`}</div>
+						<div className="text-xl font-bold uppercase">Home Clud{info?.name && ` - ${info.name}`}</div>
 						<div className="text-sm">A Home cloud app made in JavaScript</div>
 						<div className="mt-3 flex items-center">
-							<svg className="h-5 w-5 mr-2 inline text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+							<svg className="icon info-icon" fill="currentColor" viewBox="0 0 24 24">
 								<title>GitHub Repository</title>
 								<path
 									fillRule="evenodd"
@@ -27,42 +24,34 @@ const Info = () => {
 							</a>
 						</div>
 						<div className="mt-2 flex items-center">
-							<StarIcon className="h-5 w-5 mr-2 inline text-gray-700" />
+							<StarIcon className="icon info-icon" />
 							<div>1</div>
 						</div>
 					</div>
 				</div>
-				<div className="max-w-sm w-full shadow-sm rounded-lg border border-gray-200 p-4">
-					<p className="text-md font-semibold mb-2">Directory Info</p>
-					{dirInfo && (
-						<>
-							<div className="mt-2 flex text-sm items-center">
-								<FolderOpenIcon className="h-5 w-5 mr-2 inline text-gray-700" />
-								<div>
-									Total size <span>{dirInfo.size}</span>
-								</div>
+				{info && (
+					<div className="info-card p-4">
+						<p className="text-md font-semibold mb-2">Directory Info</p>
+						<div className="mt-2 flex text-sm items-center">
+							<FolderOpenIcon className="icon info-icon" />
+							<div>
+								Total size <span>{info.size}</span>
 							</div>
-							<div className="mt-2 flex text-sm items-center">
-								<CalendarIcon className="h-5 w-5 mr-2 inline text-gray-700" />
-								<div>
-									Created{" "}
-									<span>
-										<Moment fromNow>{dirInfo.created}</Moment>
-									</span>
-								</div>
+						</div>
+						<div className="mt-2 flex text-sm items-center">
+							<CalendarIcon className="icon info-icon" />
+							<div>
+								Created <span>{getDateAgo(info.created)}</span>
 							</div>
-							<div className="mt-2 flex text-sm items-center">
-								<CalendarIcon className="h-5 w-5 mr-2 inline text-gray-700" />
-								<div>
-									Modified{" "}
-									<span>
-										<Moment fromNow>{dirInfo.modified}</Moment>
-									</span>
-								</div>
+						</div>
+						<div className="mt-2 flex text-sm items-center">
+							<CalendarIcon className="icon info-icon" />
+							<div>
+								Modified <span>{getDateAgo(info.created)}</span>
 							</div>
-						</>
-					)}
-				</div>
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

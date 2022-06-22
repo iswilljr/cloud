@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from "next/link";
-import { selectPathname, setLoading } from "app/appSlice";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { LoadingContext } from "context/loading-context";
+import { useContext } from "react";
 
-const Error = () => {
-	const dispatch = useAppDispatch();
-	const pathname = useAppSelector(selectPathname);
+const Error = ({ pathname = "/", message, href }: { pathname?: string; message?: string; href?: string }) => {
+	const loading = useContext(LoadingContext);
 
 	return (
 		<div className="w-full h-64 flex flex-col items-center justify-center">
@@ -32,12 +30,12 @@ const Error = () => {
 				></path>
 			</svg>
 			<p className="text-lg leading-5 font-medium text-gray-900 mb-3">
-				Sorry! There is no such a file or directory named {`"${pathname.split(/\/+/g).pop()}"`}.
+				{message || `Sorry! There is no such a file or directory named "${pathname.split(/\/+/g).pop()}".`}
 			</p>
 			<p>
 				We suggest you to go back to{" "}
-				<Link replace href="/home">
-					<a onClick={() => dispatch(setLoading(true))} className="link transition-colors duration-150">
+				<Link replace href={href || "/home"}>
+					<a onClick={() => loading.setIsLoading(true)} className="link transition-colors duration-150">
 						Home
 					</a>
 				</Link>

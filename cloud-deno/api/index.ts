@@ -1,23 +1,20 @@
-import axios, { AxiosResponse } from "axios";
-import { ResponseFailure, ResponseSuccess } from "./Response";
+import axios, { Response as AxiosResponse } from "redaxios";
+import { BlobResponse, ListResponse } from "./Response";
 
-class Api {
-	#api;
-	constructor(url: string) {
-		this.#api = axios.create({ baseURL: url });
-	}
-	async #apiCall(request: () => Promise<AxiosResponse>) {
-		try {
-			return (await request()).data;
-		} catch (e: any) {
-			return e.response.data;
-		}
-	}
-	list(url: string = "/"): Promise<ResponseSuccess | ResponseFailure> {
-		return  this.#apiCall(() => this.#api.get(`/ls${url}`));
+const api = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_URL });
+
+async function apiCall<T>(request: () => Promise<AxiosResponse<T>>): Promise<T> {
+	try {
+		return (await request()).data;
+	} catch (e: any) {
+		return e.data || { success: false, message: "Something went wrong" };
 	}
 }
 
-const api = new Api(process.env.NEXT_PUBLIC_API_URL ?? "");
+export function getList(url: string = "/") {
+	return apiCall<ListResponse>(() => api.get(`/ls${url}`));
+}
 
-export const list = api.list.bind(api);
+export function getBlob(url: string = "/") {
+	return apiCall<BlobResponse>(() => api.get(`/blob${url}`));
+}
