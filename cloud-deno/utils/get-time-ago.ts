@@ -28,7 +28,7 @@ function getUnit(date: number): [Unit, number] {
 	return unit[0] === "day" ? unit : [unit[0], parseDate(date, unit[0])];
 }
 
-export function getDateAgo(date: number): string {
+export function getTimeAgo(date: number): string {
 	if (typeof Intl === "undefined") return "days ago";
 	const [unit, time] = getUnit(date);
 	return new Intl.RelativeTimeFormat("en-EN").format(-time, unit);

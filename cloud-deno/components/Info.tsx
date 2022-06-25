@@ -1,6 +1,6 @@
 import { CalendarIcon, FolderOpenIcon, StarIcon } from "@heroicons/react/solid";
 import { BlobInfo, ListInfo } from "api/Response";
-import { getDateAgo } from "utils/get-date-ago";
+import { getTimeAgo } from "utils/get-time-ago";
 
 const Info = ({ info }: { info?: ListInfo | BlobInfo }) => {
 	return (
@@ -41,13 +41,13 @@ const Info = ({ info }: { info?: ListInfo | BlobInfo }) => {
 						<div className="mt-2 flex text-sm items-center">
 							<CalendarIcon className="icon info-icon" />
 							<div>
-								Created <span>{getDateAgo(info.created)}</span>
+								Created <span>{getTimeAgo(info.created)}</span>
 							</div>
 						</div>
 						<div className="mt-2 flex text-sm items-center">
 							<CalendarIcon className="icon info-icon" />
 							<div>
-								Modified <span>{getDateAgo(info.created)}</span>
+								Modified <span>{getTimeAgo(info.created)}</span>
 							</div>
 						</div>
 					</div>
