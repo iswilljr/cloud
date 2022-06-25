@@ -38,7 +38,7 @@ Environment variables that are needed:
 
 - `HOME_CLOUD_STORAGE`: The storage path for the home cloud (required)
 - `TOKEN`: The token for the github api (required)
-  - Generate a token with no scopes [here](https://github.com/settings/tokens)
+  - Generate a token with no scopes [here](https://github.com/settings/tokens/new)
 
 With npm:
 
