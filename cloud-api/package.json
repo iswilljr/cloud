@@ -37,7 +37,7 @@
 		"@types/file-size": "^1.0.1",
 		"@types/mime-types": "^2.1.1",
 		"@types/morgan": "^1.9.3",
-		"@types/node": "^17.0.31",
+		"@types/node": "^18.0.0",
 		"@typescript-eslint/eslint-plugin": "^5.27.1",
 		"@typescript-eslint/parser": "^5.27.1",
 		"colors": "^1.4.0",

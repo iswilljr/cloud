@@ -1,3 +1,5 @@
+// This is copied from https://github.com/antoniosarosi/home-cloud/blob/master/server/src/middlewares/enoent.js
+
 import { NextFunction, Request, Response } from "express";
 import { manageErr } from "./base";
 
