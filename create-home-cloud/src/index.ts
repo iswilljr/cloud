@@ -6,7 +6,7 @@ async function getName(): Promise<string> {
 	return (
 		(
 			(await prompts(
-				{ type: "text", name: "name", message: "Enter a name for your project..." },
+				{ type: "text", name: "name", message: "Enter a name for your project...", initial: "cloud" },
 				{ onCancel: () => process.exit(1) }
 			)) as { name?: string }
 		).name ?? "cloud"
