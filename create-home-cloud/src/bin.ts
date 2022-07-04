@@ -56,11 +56,11 @@ program
 			await prev;
 			return cloneAndInstallDeps(repo, name, skipInstall, packageManager);
 		}, Promise.resolve());
-		
+
 		logger.success(`${name} successfully setup.`);
 		logger.newLine()
 		console.log("To get started, run:");
-		console.log("    cd", logger.cyan("cloud-api"));
+		console.log("    cd", logger.cyan(`${name}/cloud-api`));
 		console.log(`   `, logger.cyan(packageManager), "run", logger.cyan("cloud-deno"));
 		logger.newLine();
 		logger.info(`For more information, visit: ${logger.url("https://iswilljr.github.io/cloud/docs/getting-started")}`);
