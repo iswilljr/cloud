@@ -23,7 +23,7 @@ const config = {
 			({
 				docs: {
 					sidebarPath: require.resolve("./sidebars.js"),
-					editUrl: "https://github.com/iswilljr/cloud/tree/master/cloud-docs/docs/",
+					editUrl: "https://github.com/iswilljr/cloud/tree/master/cloud-docs/",
 				},
 				theme: { customCss: require.resolve("./src/css/custom.css") },
 			}),
