@@ -13,7 +13,7 @@ const config = {
 	onBrokenMarkdownLinks: "warn",
 	favicon: "img/favicon.ico",
 	organizationName: "iswilljr",
-	projectName: "cloud/cloud-docs",
+	projectName: "cloud",
 	trailingSlash: false,
 	i18n: { defaultLocale: "en", locales: ["en"] },
 	presets: [
