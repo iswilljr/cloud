@@ -1,0 +1,35 @@
+{
+  "name": "cloud-setup",
+  "version": "2.0.0",
+  "description": "How to setup the fullstack home cloud (with deno or github interface)",
+  "main": "index.js",
+  "scripts": {
+		"install:api": "git clone https://github.com/iswilljr/cloud-api.git && cd cloud-api && yarn",
+		"install:github": "git clone https://github.com/iswilljr/cloud-github.git && cd cloud-github && yarn",
+		"install:deno": "git clone https://github.com/iswilljr/cloud-deno.git && cd cloud-deno && yarn",
+		"setup:api": "cd cloud-api && yarn setup",
+		"build:api": "cd cloud-api && yarn build",
+		"build:github": "cd cloud-github && yarn build",
+		"build:deno": "cd cloud-deno && yarn build",
+		"start:api": "cd cloud-api && yarn start",
+		"start:github": "cd cloud-github && yarn start",
+		"start:deno": "cd cloud-deno && yarn start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iswilljr/cloud-setup.git"
+  },
+  "keywords": [
+    "cloud",
+    "home-cloud",
+    "api",
+    "github",
+    "deno"
+  ],
+  "author": "iswilljr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iswilljr/cloud-setup/issues"
+  },
+  "homepage": "https://github.com/iswilljr/cloud-setup#readme"
+}
