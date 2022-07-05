@@ -1,5 +1,3 @@
-import "styles/globals.css";
-import "styles/github-markdown-light.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Header from "components/Header";
@@ -7,6 +5,8 @@ import Tree from "components/Tree";
 import Info from "components/Info";
 import { useEffect, useState } from "react";
 import { LoadingContext } from "context/loading-context";
+import "styles/globals.css";
+import "github-markdown-css/github-markdown-light.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const [isLoading, setIsLoading] = useState(false);

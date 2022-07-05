@@ -3,7 +3,7 @@ import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
 import Layout from "../components/Layout/Layout";
 import "styles/globals.css";
-import "styles/markdown.css";
+import "github-markdown-css/github-markdown-dark.css";
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (
