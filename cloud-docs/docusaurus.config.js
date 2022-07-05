@@ -43,7 +43,7 @@ const config = {
 			footer: {
 				style: "dark",
 				links: [
-					{ title: "Docs", items: [{ label: "Tutorial", to: "/docs/intro" }] },
+					{ title: "Docs", items: [{ label: "Get Started", to: "/docs/getting-started" }] },
 					{
 						title: "Social",
 						items: [{ label: "Twitter", href: "https://twitter.com/iswilljr" }],
