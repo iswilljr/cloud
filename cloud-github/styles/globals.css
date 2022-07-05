@@ -1,0 +1,101 @@
+html,
+body {
+	color-scheme: dark;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--icon-color: #8b949e;
+	--link-color: #58a6ff;
+	--text-color: #c1d1d9;
+	--border-color: #21262d;
+	--border-hover-color: #30363d;
+	--succes-color: #238636;
+	--border-copy-color: rgba(240, 246, 253, 0.1);
+	--background-color: #0d1117;
+	--background-hover-color: #161b22;
+	--border-selected: #f78166;
+}
+
+.bg {
+	background-color: var(--background-color) !important;
+}
+
+.markdown-body.bg .highlight pre,
+.markdown-body.bg pre {
+	background-color: var(--background-color) !important;
+	padding: 0 0 0 16px;
+}
+
+.linear-progress {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: none;
+	height: 0.25em;
+	color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+	background-color: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
+	font-size: 16px;
+}
+.linear-progress::-webkit-progress-bar {
+	background-color: transparent;
+}
+/* Determinate */
+.linear-progress::-webkit-progress-value {
+	background-color: currentColor;
+	transition: all 0.2s;
+}
+.linear-progress::-moz-progress-bar {
+	background-color: currentColor;
+	transition: all 0.2s;
+}
+.linear-progress::-ms-fill {
+	border: none;
+	background-color: currentColor;
+	transition: all 0.2s;
+}
+/* Indeterminate */
+.linear-progress:indeterminate {
+	background-size: 200% 100%;
+	background-image: linear-gradient(
+		to right,
+		transparent 50%,
+		currentColor 50%,
+		currentColor 60%,
+		transparent 60%,
+		transparent 71.5%,
+		currentColor 71.5%,
+		currentColor 84%,
+		transparent 84%
+	);
+	animation: linear-progress 2s infinite linear;
+}
+.linear-progress:indeterminate::-moz-progress-bar {
+	background-color: transparent;
+}
+.linear-progress:indeterminate::-ms-fill {
+	animation-name: none;
+}
+
+@keyframes linear-progress {
+	0% {
+		background-size: 200% 100%;
+		background-position: left -31.25% top 0%;
+	}
+	50% {
+		background-size: 800% 100%;
+		background-position: left -49% top 0%;
+	}
+	100% {
+		background-size: 400% 100%;
+		background-position: left -102% top 0%;
+	}
+}
