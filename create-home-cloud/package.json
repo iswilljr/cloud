@@ -1,57 +1,56 @@
 {
-  "name": "create-home-cloud",
-  "version": "2.0.4",
-  "description": "Get started with the fullstack home cloud project",
-  "main": "lib/index.js",
-  "type": "module",
-  "bin": {
-    "create-home-cloud": "lib/bin.js"
-  },
-  "scripts": {
-    "clean": "rimraf cloud",
-    "dev": "tsc && yarn start",
-    "build": "rimraf lib && tsc",
-    "watch": "tsc --watch",
-    "typecheck": "tsc --noEmit",
+	"name": "create-home-cloud",
+	"version": "2.0.4",
+	"description": "Get started with the fullstack home cloud project",
+	"main": "lib/index.js",
+	"type": "module",
+	"bin": {
+		"create-home-cloud": "lib/bin.js"
+	},
+	"scripts": {
+		"clean": "rimraf cloud",
+		"dev": "tsc && yarn start",
+		"build": "rimraf lib && tsc",
+		"watch": "tsc --watch",
+		"typecheck": "tsc --noEmit",
 		"test": "node lib/bin.js",
 		"test:build": "yarn build && yarn test"
-  },
-  "keywords": [
-    "create",
-    "init",
-    "home",
-    "cloud",
-    "home-cloud"
-  ],
-  "author": "iswilljr",
-  "license": "ISC",
+	},
+	"keywords": [
+		"create",
+		"init",
+		"home",
+		"cloud",
+		"home-cloud"
+	],
+	"author": "iswilljr",
+	"license": "ISC",
 	"files": [
 		"lib",
 		"README.md"
 	],
-  "dependencies": {
-    "chalk": "5.0.1",
-    "commander": "9.3.0",
-    "execa": "6.1.0",
-    "prompts": "2.4.2",
-    "shelljs": "0.8.5"
-  },
-  "devDependencies": {
-    "@types/node": "18.0.1",
-    "@types/prompts": "2.0.14",
-    "@types/shelljs": "^0.8.11",
-    "rimraf": "3.0.2",
-    "typescript": "4.7.4"
-  },
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iswilljr/create-home-cloud.git"
-  },
-  "bugs": {
-    "url": "https://github.com/iswilljr/create-home-cloud/issues"
-  },
-  "homepage": "https://github.com/iswilljr/create-home-cloud#readme"
+	"dependencies": {
+		"chalk": "5.0.1",
+		"commander": "9.3.0",
+		"prompts": "2.4.2",
+		"shelljs": "0.8.5"
+	},
+	"devDependencies": {
+		"@types/node": "18.0.1",
+		"@types/prompts": "2.0.14",
+		"@types/shelljs": "^0.8.11",
+		"rimraf": "3.0.2",
+		"typescript": "4.7.4"
+	},
+	"directories": {
+		"lib": "lib"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/iswilljr/create-home-cloud.git"
+	},
+	"bugs": {
+		"url": "https://github.com/iswilljr/create-home-cloud/issues"
+	},
+	"homepage": "https://github.com/iswilljr/create-home-cloud#readme"
 }
