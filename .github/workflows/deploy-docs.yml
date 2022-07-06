@@ -1,0 +1,44 @@
+name: Deploy Docs Site
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "cloud-docs/**/*"
+
+jobs:
+  Lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+          cache: "yarn"
+      - name: Install dependencies
+        run: yarn
+      - name: Lint
+        run: yarn lint
+
+  Deploy:
+    needs: [Lint]
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+          cache: "yarn"
+      - name: Move to docs directory
+        run: cd cloud-docs
+      - name: Install dependencies
+        run: yarn
+      - name: Deploy
+        run: GIT_USER=${{ github.actor }} GIT_PASS={{ github.token }} yarn deploy
