@@ -1,9 +1,5 @@
 name: Deploy Docs Site to GitHub Pages
 
-defaults:
-  run:
-    working-directory: website
-
 on:
   push:
     branches:
@@ -13,6 +9,9 @@ on:
 
 jobs:
   deploy:
+    defaults:
+      run:
+        working-directory: website
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     steps:
