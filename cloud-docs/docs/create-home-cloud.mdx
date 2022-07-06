@@ -1,0 +1,101 @@
+---
+sidebar_position: 6
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Create Home Cloud
+
+Create the home cloud with the command line tool.
+
+## Get started
+
+Get started just by running the following command:
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```bash
+npm init home-cloud@latest
+```
+
+</TabItem>
+<TabItem value="yarn" label="Yarn">
+
+```bash
+yarn create home-cloud
+```
+
+</TabItem>
+
+</Tabs>
+
+The command will ask you for some information.
+
+## Usage
+
+**command [[project-name]](#project-name) [[interfaces]](#interfaces) [[options]](#options)**
+
+- `project-name` : The name of the project.
+- `interfaces`: The interfaces to be created.
+- `options`: The options to be used.
+
+Example:
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```bash
+npm init home-cloud@latest my-cloud github,deno -s
+```
+
+</TabItem>
+<TabItem value="yarn" label="Yarn">
+
+```bash
+yarn create home-cloud my-cloud github,deno -s
+```
+
+</TabItem>
+
+</Tabs>
+
+## Project name
+
+If you pass the project name as the first argument, it will be used as the project name.
+If you don't pass the project name, it will ask you to enter the project name, you can simply press enter and it will set the default project name. 
+
+- `default`: cloud
+
+## Interfaces
+
+Interfaces avaliables:
+
+- `github`: Create the cloud with github interface
+- `deno`: Create the cloud with deno interface
+
+you can pass the interfaces as the second argument, if you don't pass the interfaces, it will ask you to enter the interfaces.
+
+### How to pass more than one interfaces
+
+You can use comma to separate them. Example:
+
+```bash
+github,deno # github and deno
+github # only github
+deno # only deno
+```
+
+## Options
+
+These are the options to be used.
+
+- `-h, --help`: Show the help.
+- `-p, --package-manager <package-manager>`: The package manager to be used
+	- options:
+		- `npm`: Use npm to install the dependencies.
+		- `yarn`: Use yarn to install the dependencies.
+		- `pnpm`: Use pnpm to install the dependencies.
+	- if you don't pass the package manager, it will ask you to enter the package manager.
+- `-s, --skip-install`: Skip the installation of dependencies.
+
