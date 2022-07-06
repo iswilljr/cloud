@@ -26,14 +26,14 @@ const Display = ({ id, created, isDirectory, isFile, name, path, modified, size,
 	const href = `${isFile ? "/blob" : "/home"}${path}`;
 
 	return (
-		<div className={classes.control} {...props}>
+		<div key={id} className={classes.control} {...props} data-size={size}>
+			{created && <time dateTime={`${created}`} style={{ display: "none" }} />}
 			<div className={classes.info}>
 				{isFile && <FileIcon {...SvgProps} />}
 				{isDirectory && <FolderIcon {...SvgProps} />}
 				<Link href={href}>
 					<a
 						onClick={() => context.setIsLoading(true)}
-						onKeyDown={() => {}}
 						role="button"
 						tabIndex={-1}
 						className={cx(defaultClasses.anchor, classes.name)}
