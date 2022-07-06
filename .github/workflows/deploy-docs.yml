@@ -2,14 +2,14 @@ name: Deploy Docs Site to GitHub Pages
 
 defaults:
   run:
-    working-directory: "cloud-docs"
+    working-directory: website
 
 on:
   push:
     branches:
       - master
     paths:
-      - "cloud-docs/**/*"
+      - "website/**/*"
 
 jobs:
   deploy:
