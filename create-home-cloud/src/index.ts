@@ -53,8 +53,8 @@ export async function getPackageManager(packageManager?: PackageManager): Promis
 	return (await prompts({ type: "select", name, message, choices }, { onCancel })).pm ?? defaultPM;
 }
 
-export function getScripts(repo: string, rootdir: string, packageManager: PackageManager) {
-	const repoPath = path.join(rootdir, `cloud/cloud-${repo}`);
+export function getScripts(repo: string, folderName: string, rootdir: string, packageManager: PackageManager) {
+	const repoPath = path.join(rootdir, `${folderName}/cloud-${repo}`);
 	const downloadScript = `
 mkdir -p ${repoPath}
 cd ${repoPath}
@@ -83,10 +83,10 @@ interface MakeDirOptions {
 	installDeps: boolean;
 }
 
-export function makeDir({ repo, folderName, installDeps, packageManager, rootdir }: MakeDirOptions): Promise<void> {
-	return new Promise((res, rej) => {
+export function makeDir({ repo, installDeps, folderName, packageManager, rootdir }: MakeDirOptions): Promise<void> {
+	return new Promise((resolve, reject) => {
 		logger.info(`Installing cloud-${repo}...`);
-		const { downloadScript, installScript, repoPath } = getScripts(repo, rootdir, packageManager);
+		const { downloadScript, installScript } = getScripts(repo, folderName, rootdir, packageManager);
 		const downloaded = shelljs.exec(downloadScript, { silent: true, async: true });
 		downloaded.on("exit", () => {
 			logger.success(`cloud-${repo} installed.`);
@@ -95,12 +95,12 @@ export function makeDir({ repo, folderName, installDeps, packageManager, rootdir
 				const installed = shelljs.exec(installScript, { silent: true, async: true });
 				installed.on("exit", () => {
 					logger.success(`${repo} dependencies installed.`);
-					res(void 0);
+					resolve(undefined);
 				});
-				installed.on("error", rej);
-			} else res(void 0);
+				installed.on("error", reject);
+			} else resolve(undefined);
 		});
-		downloaded.on("error", rej);
+		downloaded.on("error", reject);
 	});
 }
 

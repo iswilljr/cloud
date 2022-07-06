@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { MediaQuery, Text } from "@mantine/core";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -25,7 +24,7 @@ const Error = () => {
 						<div>
 							{wrappers.map((wrapper, index) => (
 								<div key={index} style={wrapper.style}>
-									<Image {...wrapper.image} />
+									<Image {...wrapper.image} alt={wrapper.image.alt} />
 								</div>
 							))}
 						</div>

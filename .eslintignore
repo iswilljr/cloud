@@ -1,0 +1,7 @@
+node_modules
+.next
+.docusaurus
+build
+dist
+lib
+create-home-cloud/cloud

@@ -11,10 +11,10 @@ async function apiCall<T>(request: () => Promise<AxiosResponse<T>>): Promise<T> 
 	}
 }
 
-export function getList(url: string = "/") {
+export function getList(url = "/") {
 	return apiCall<ListResponse>(() => api.get(`/ls${url}`));
 }
 
-export function getBlob(url: string = "/") {
+export function getBlob(url = "/") {
 	return apiCall<BlobResponse>(() => api.get(`/blob${url}`));
 }

@@ -17,7 +17,7 @@ export interface TypeDirectories {
 	};
 }
 
-export interface BlobInfo extends Item {}
+export type BlobInfo = Item;
 
 export interface ListInfo extends Item {
 	readme: { has: false } | { has: true; name: string; content: string };

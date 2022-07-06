@@ -9,7 +9,7 @@ interface Loading {
 
 export const LoadingContext = createContext<Loading>({
 	isLoading: true,
-	setIsLoading: () => {},
+	setIsLoading: () => undefined,
 });
 
 LoadingContext.displayName = "isLoading";

@@ -1,11 +1,8 @@
 #!/usr/bin/env node
-import path from "path";
-import fs from "fs/promises";
 import { createRequire } from "module";
 import { Option, program } from "commander";
-import shelljs from "shelljs";
 import logger from "./logger.js";
-import createHomeCloud, { getFolderName, getPackageManager, getRepos } from "./index.js";
+import createHomeCloud from "./index.js";
 
 const packageJson = createRequire(import.meta.url)("../package.json");
 const dir = process.cwd();
