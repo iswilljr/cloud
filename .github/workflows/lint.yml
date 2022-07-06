@@ -1,13 +1,17 @@
-name: Hello World
+name: Lint
 
 on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize]
 
 jobs:
-  hello:
-    name: Say hello!
+  Lint:
+    name: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,12 +20,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.15.1
-      - name: Enable yarn
-        run: corepack enable
+          cache: "yarn"
       - name: Install dependencies
         run: yarn
       - name: Lint
         run: yarn lint
-      - name: Hello
-        run: echo "Hello World!"
         
