@@ -1,9 +1,0 @@
-{
-  "label": "Cloud - Setup",
-  "position": 2,
-  "link": {
-		"slug": "cloud-setup",
-    "type": "generated-index",
-    "description": "Cloud Setup"
-  }
-}
