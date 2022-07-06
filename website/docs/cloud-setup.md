@@ -8,7 +8,7 @@ This is a guide to setting up the home cloud environment
 
 ## Getting started
 
-Setup the home cloud api running the following commands
+Setup the home cloud api running the following commands:
 
 ```bash
 yarn install:api
