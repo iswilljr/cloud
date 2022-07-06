@@ -1,3 +1,4 @@
+import axios from "axios";
 import { token } from "../variables";
 
 async function md2html(markdown: string) {
@@ -6,11 +7,7 @@ async function md2html(markdown: string) {
 		Authorization: `Bearer ${token}`,
 	};
 	try {
-		const html = await fetch("https://api.github.com/markdown/raw", {
-			method: "POST",
-			body: markdown,
-			headers,
-		}).then((r) => r.text());
+		const html = (await axios.post("https://api.github.com/markdown/raw", markdown, { headers })).data;
 		return html.replace(/\n$/, "");
 	} catch (error: any) {
 		console.log("[-] Something went wrong with md2html, make sure your token is correct");
