@@ -1,68 +1,153 @@
-import logger from "./logger.js";
+import fs from "fs/promises";
+import path from "path";
 import shelljs from "shelljs";
 import prompts from "prompts";
+import logger from "./logger.js";
 
-async function getName(): Promise<string> {
-	return (
-		(
-			(await prompts(
-				{ type: "text", name: "name", message: "Enter a name for your project...", initial: "cloud" },
-				{ onCancel: () => process.exit(1) }
-			)) as { name?: string }
-		).name ?? "cloud"
-	);
-}
+const onCancel = () => process.exit(1);
 
-type PackageManager = "npm" | "yarn" | "pnpm";
-
-async function getPackageManager(packageManager?: PackageManager): Promise<PackageManager> {
-	const defaultPackageManager = "npm";
-	const hasYarn = shelljs.exec("yarn --version", { silent: true }).code === 0;
-	const hasPnpm = shelljs.exec("pnpm --version", { silent: true }).code === 0;
-
-	if (packageManager) {
-		if (packageManager === defaultPackageManager) return defaultPackageManager;
-		if ((packageManager === "yarn" && hasYarn) || (packageManager === "pnpm" && hasPnpm)) return packageManager;
-		else logger.info(`Selected package manager ${packageManager} is not installed.`);
-	}
-
-	if (!hasYarn && !hasPnpm) {
-		if (packageManager) logger.info(`${packageManager} is not installed. Using ${defaultPackageManager} instead.`);
-		return defaultPackageManager;
-	}
-
-	const choices = ["npm", hasYarn && "yarn", hasPnpm && "pnpm"]
-		.filter((p): p is string => Boolean(p))
-		.map((p) => ({ title: p, value: p }));
-
-	return (
-		(
-			(await prompts(
-				{ type: "select", name: "packageManager", message: "Select a package manager...", choices },
-				{ onCancel: () => process.exit(1) }
-			)) as { packageManager?: PackageManager }
-		).packageManager ?? defaultPackageManager
-	);
-}
-
-enum Repos {
+export enum Repos {
 	Github = "github",
 	Deno = "deno",
 }
 
-async function getRepos(): Promise<Repos[]> {
+export type PackageManager = "npm" | "yarn" | "pnpm";
+
+export async function getFolderName(): Promise<string> {
+	const message = "Enter a name for your project...";
+	const initial = "cloud";
+	return (await prompts({ type: "text", name: "name", message, initial }, { onCancel })).name ?? "cloud";
+}
+
+export async function getRepos(): Promise<Repos[]> {
 	const choices = [
 		{ title: "Github", value: Repos.Github },
 		{ title: "Deno", value: Repos.Deno },
 	];
-	return (
-		(
-			(await prompts(
-				{ type: "multiselect", name: "repos", message: "Select templates sites to install...", choices, min: 1 },
-				{ onCancel: () => process.exit(1) }
-			)) as { repos?: Repos[] }
-		).repos ?? [Repos.Github]
-	);
+	const message = "Select templates sites to install...";
+	const type = "multiselect";
+	return (await prompts({ type, name: "repos", message, choices, min: 1 }, { onCancel })).repos ?? [Repos.Github];
 }
 
-export { getName, getPackageManager, getRepos };
+export async function getPackageManager(packageManager?: PackageManager): Promise<PackageManager> {
+	const defaultPM = "npm";
+	const hasYarn = shelljs.exec("yarn --version", { silent: true }).code === 0;
+	const hasPnpm = shelljs.exec("pnpm --version", { silent: true }).code === 0;
+
+	if (packageManager) {
+		if (packageManager === defaultPM) return defaultPM;
+		if ((packageManager === "yarn" && hasYarn) || (packageManager === "pnpm" && hasPnpm)) return packageManager;
+		else logger.info(`Selected package manager ${packageManager} is not installed.`);
+	}
+	if (!hasYarn && !hasPnpm) {
+		if (packageManager) logger.info(`${packageManager} is not installed. Using ${defaultPM} instead.`);
+		return defaultPM;
+	}
+
+	const choices = ["npm", hasYarn && "yarn", hasPnpm && "pnpm"]
+		.filter((p): p is string => !!p)
+		.map((p) => ({ title: p, value: p }));
+	const message = "Select a package manager...";
+	const name = "pm";
+
+	return (await prompts({ type: "select", name, message, choices }, { onCancel })).pm ?? defaultPM;
+}
+
+export function getScripts(repo: string, rootdir: string, packageManager: PackageManager) {
+	const repoPath = path.join(rootdir, `cloud/cloud-${repo}`);
+	const downloadScript = `
+mkdir -p ${repoPath}
+cd ${repoPath}
+curl https://codeload.github.com/iswilljr/cloud/tar.gz/master | \
+tar -xz --strip=2 cloud-master/cloud-${repo}
+`;
+	const installScript = `
+cd ${repoPath}
+${packageManager} install
+`;
+	return { downloadScript, installScript, repoPath };
+}
+
+export async function existDir(dir: string) {
+	return await fs
+		.access(dir)
+		.then(() => true)
+		.catch(() => false);
+}
+
+interface MakeDirOptions {
+	rootdir: string;
+	repo: string;
+	folderName: string;
+	packageManager: PackageManager;
+	installDeps: boolean;
+}
+
+export function makeDir({ repo, folderName, installDeps, packageManager, rootdir }: MakeDirOptions): Promise<void> {
+	return new Promise((res, rej) => {
+		logger.info(`Installing cloud-${repo}...`);
+		const { downloadScript, installScript, repoPath } = getScripts(repo, rootdir, packageManager);
+		const downloaded = shelljs.exec(downloadScript, { silent: true, async: true });
+		downloaded.on("exit", () => {
+			logger.success(`cloud-${repo} installed.`);
+			if (installDeps) {
+				logger.info(`Installing cloud-${repo} dependencies with ${packageManager}...`);
+				const installed = shelljs.exec(installScript, { silent: true, async: true });
+				installed.on("exit", () => {
+					logger.success(`${repo} dependencies installed.`);
+					res(void 0);
+				});
+				installed.on("error", rej);
+			} else res(void 0);
+		});
+		downloaded.on("error", rej);
+	});
+}
+
+export default async function createHomeCloud(
+	rootdir: string,
+	folderName?: string,
+	repos?: string,
+	packageManager?: PackageManager,
+	skipInstall?: boolean
+) {
+	const parsedFolderName = folderName || (await getFolderName());
+	const parsedRepos = ["api", ...(repos ? repos.split(",").filter((r) => r === "github" || r === "deno") : [])];
+	if (parsedRepos.length === 1) {
+		if (repos) logger.info("invalid repos, asking for repos...");
+		parsedRepos.push(...(await getRepos()));
+	}
+	const parsedPM = await getPackageManager(packageManager);
+
+	const existFolderName = await existDir(path.join(rootdir, parsedFolderName));
+	if (existFolderName) {
+		logger.error(`Folder ${logger.path(parsedFolderName)} already exists.`);
+		process.exit(1);
+	}
+
+	logger.info(`Creating folder ${logger.path(parsedFolderName)}...`);
+	logger.newLine();
+
+	await parsedRepos.reduce(async (prev, repo) => {
+		await prev;
+		return makeDir({
+			repo,
+			folderName: parsedFolderName,
+			installDeps: !skipInstall,
+			packageManager: parsedPM,
+			rootdir,
+		});
+	}, Promise.resolve());
+
+	const usingNpm = parsedPM === "npm";
+
+	logger.newLine();
+	logger.success(`${parsedFolderName} successfully setup.`);
+	console.log(`To get started, run:
+  ${logger.cyan(`cd ${parsedFolderName}/cloud-api`)}
+  ${logger.cyan(`${parsedPM} ${usingNpm ? "run " : ""}build`)}
+  ${logger.cyan(`${parsedPM} ${usingNpm ? "run " : ""}setup`)}
+  ${logger.cyan(`${parsedPM} start`)}
+`);
+	logger.info(`For more information, visit: ${logger.url("https://iswilljr.github.io/cloud/docs/getting-started")}`);
+}
