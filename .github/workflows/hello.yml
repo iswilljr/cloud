@@ -3,7 +3,7 @@ name: Hello World
 on:
   push:
     branches:
-      - github-actions
+      - master
 
 jobs:
   hello:
@@ -22,3 +22,6 @@ jobs:
         run: yarn
       - name: Lint
         run: yarn lint
+      - name: Hello
+        run: echo "Hello World!"
+        
