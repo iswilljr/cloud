@@ -66,6 +66,17 @@ To pass the test, you need to make sure that the following directories and files
 
 if $HOME_CLOUD_STORAGE is not set, see how to setup the environment variables in the [Setup](#setup-environment-variables) section.
 
+to get started, run the following command (make sure you change $HOME_CLOUD_STORAGE to the correct path):
+
+```bash
+cd $HOME_CLOUD_STORAGE
+mkdir __cloud_api_test__
+touch __cloud_api_test__/test.txt
+touch __cloud_api_test__/test.md
+echo "ok" >> __cloud_api_test__/test.txt
+echo "# Test" >> __cloud_api_test__/test.md
+```
+
 ## Scripts
 
 - `yarn start`: Start the server
