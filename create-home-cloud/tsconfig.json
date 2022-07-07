@@ -1,14 +1,14 @@
 {
-	"compilerOptions": {
-		"target": "ES2020",
-		"module": "NodeNext",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"moduleResolution": "NodeNext",
-		"rootDir": "src",
-		"outDir": "lib"
-	},
-	"exclude": ["node_modules", "cloud"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "NodeNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "NodeNext",
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "exclude": ["node_modules", "cloud"]
 }

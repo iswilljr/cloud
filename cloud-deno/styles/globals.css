@@ -3,159 +3,159 @@
 @tailwind utilities;
 
 @layer base {
-	body {
-		@apply bg-gray-50 select-none;
-	}
+  body {
+    @apply bg-gray-50 select-none;
+  }
 }
 
 @layer components {
-	.icon {
-		@apply w-5 h-5;
-	}
-	.icon-2 {
-		@apply w-6 h-6 text-gray-400 inline-block mr-2;
-	}
-	.link {
-		@apply text-[#3b82f6] hover:text-[#60a5fa] cursor-pointer;
-	}
-	.header {
-		@apply mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 max-w-screen-xl;
-	}
-	.image {
-		@apply h-10 w-auto sm:h-12 my-2 rounded-full;
-	}
-	.name {
-		@apply font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight;
-	}
-	.page-name {
-		@apply font-normal text-sm sm:text-lg leading-tight tracking-tight;
-	}
-	.info {
-		@apply relative sm:static row-start-1 md:row-start-auto;
-	}
-	.info-content {
-		@apply sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4;
-	}
-	.info-card {
-		@apply max-w-sm w-full shadow-sm rounded-lg border border-gray-200;
-	}
-	.info-icon {
-		@apply mr-2 inline text-gray-700;
-	}
-	.tree {
-		@apply text-gray-500 min-h-[24px];
-	}
-	.app {
-		@apply max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4;
-	}
-	.app-main {
-		@apply mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4;
-	}
-	.app-content {
-		@apply col-span-1 md:col-span-2 lg:col-span-3;
-	}
-	.app-display {
-		@apply flex flex-col gap-4;
-	}
-	.list {
-		@apply rounded-md border border-gray-200 bg-white;
-	}
-	.list-content {
-		@apply rounded-tr-md rounded-tl-md bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between;
-	}
-	.app-info {
-		@apply;
-	}
-	.item {
-		@apply flex items-center justify-between hover:bg-gray-100 border-t border-gray-200 cursor-pointer;
-	}
-	.item-content {
-		@apply text-sm leading-5 text-gray-400;
-	}
-	.item-icon {
-		@apply px-2 sm:pl-3 md:pl-4 py-1 w-full block;
-	}
-	.item-name {
-		@apply flex-grow text-sm text-blue-500 leading-5 truncate;
-	}
-	.item-size {
-		@apply text-sm leading-5 text-gray-500 text-right min-w-fit;
-	}
-	.item-displayname {
-		@apply pl-2 py-1 w-full block truncate;
-	}
-	.item-displaysize {
-		@apply px-4 py-1 pl-1 w-full h-full block;
-	}
-	.file {
-		@apply shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white;
-	}
-	.file-header {
-		@apply bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between;
-	}
+  .icon {
+    @apply w-5 h-5;
+  }
+  .icon-2 {
+    @apply w-6 h-6 text-gray-400 inline-block mr-2;
+  }
+  .link {
+    @apply text-[#3b82f6] hover:text-[#60a5fa] cursor-pointer;
+  }
+  .header {
+    @apply mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 max-w-screen-xl;
+  }
+  .image {
+    @apply h-10 w-auto sm:h-12 my-2 rounded-full;
+  }
+  .name {
+    @apply font-bold text-gray-900 leading-tight text-2xl sm:text-3xl tracking-tight;
+  }
+  .page-name {
+    @apply font-normal text-sm sm:text-lg leading-tight tracking-tight;
+  }
+  .info {
+    @apply relative sm:static row-start-1 md:row-start-auto;
+  }
+  .info-content {
+    @apply sticky top-4 col-span-1 flex flex-col sm:flex-row md:flex-col gap-4;
+  }
+  .info-card {
+    @apply max-w-sm w-full shadow-sm rounded-lg border border-gray-200;
+  }
+  .info-icon {
+    @apply mr-2 inline text-gray-700;
+  }
+  .tree {
+    @apply text-gray-500 min-h-[24px];
+  }
+  .app {
+    @apply max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-2 pb-8 pt-4;
+  }
+  .app-main {
+    @apply mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4;
+  }
+  .app-content {
+    @apply col-span-1 md:col-span-2 lg:col-span-3;
+  }
+  .app-display {
+    @apply flex flex-col gap-4;
+  }
+  .list {
+    @apply rounded-md border border-gray-200 bg-white;
+  }
+  .list-content {
+    @apply rounded-tr-md rounded-tl-md bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between;
+  }
+  .app-info {
+    @apply;
+  }
+  .item {
+    @apply flex items-center justify-between hover:bg-gray-100 border-t border-gray-200 cursor-pointer;
+  }
+  .item-content {
+    @apply text-sm leading-5 text-gray-400;
+  }
+  .item-icon {
+    @apply px-2 sm:pl-3 md:pl-4 py-1 w-full block;
+  }
+  .item-name {
+    @apply flex-grow text-sm text-blue-500 leading-5 truncate;
+  }
+  .item-size {
+    @apply text-sm leading-5 text-gray-500 text-right min-w-fit;
+  }
+  .item-displayname {
+    @apply pl-2 py-1 w-full block truncate;
+  }
+  .item-displaysize {
+    @apply px-4 py-1 pl-1 w-full h-full block;
+  }
+  .file {
+    @apply shadow-sm rounded-lg border border-gray-200 overflow-hidden bg-white;
+  }
+  .file-header {
+    @apply bg-gray-100 border-b border-gray-200 py-2 px-4 flex justify-between;
+  }
 }
 
 .linear-progress {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	border: none;
-	height: 0.25em;
-	color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
-	background-color: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
-	font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  height: 0.25em;
+  color: rgb(var(--pure-material-primary-rgb, 33, 150, 243));
+  background-color: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
+  font-size: 16px;
 }
 .linear-progress::-webkit-progress-bar {
-	background-color: transparent;
+  background-color: transparent;
 }
 /* Determinate */
 .linear-progress::-webkit-progress-value {
-	background-color: currentColor;
-	transition: all 0.2s;
+  background-color: currentColor;
+  transition: all 0.2s;
 }
 .linear-progress::-moz-progress-bar {
-	background-color: currentColor;
-	transition: all 0.2s;
+  background-color: currentColor;
+  transition: all 0.2s;
 }
 .linear-progress::-ms-fill {
-	border: none;
-	background-color: currentColor;
-	transition: all 0.2s;
+  border: none;
+  background-color: currentColor;
+  transition: all 0.2s;
 }
 /* Indeterminate */
 .linear-progress:indeterminate {
-	background-size: 200% 100%;
-	background-image: linear-gradient(
-		to right,
-		transparent 50%,
-		currentColor 50%,
-		currentColor 60%,
-		transparent 60%,
-		transparent 71.5%,
-		currentColor 71.5%,
-		currentColor 84%,
-		transparent 84%
-	);
-	animation: linear-progress 2s infinite linear;
+  background-size: 200% 100%;
+  background-image: linear-gradient(
+    to right,
+    transparent 50%,
+    currentColor 50%,
+    currentColor 60%,
+    transparent 60%,
+    transparent 71.5%,
+    currentColor 71.5%,
+    currentColor 84%,
+    transparent 84%
+  );
+  animation: linear-progress 2s infinite linear;
 }
 .linear-progress:indeterminate::-moz-progress-bar {
-	background-color: transparent;
+  background-color: transparent;
 }
 .linear-progress:indeterminate::-ms-fill {
-	animation-name: none;
+  animation-name: none;
 }
 
 @keyframes linear-progress {
-	0% {
-		background-size: 200% 100%;
-		background-position: left -31.25% top 0%;
-	}
-	50% {
-		background-size: 800% 100%;
-		background-position: left -49% top 0%;
-	}
-	100% {
-		background-size: 400% 100%;
-		background-position: left -102% top 0%;
-	}
+  0% {
+    background-size: 200% 100%;
+    background-position: left -31.25% top 0%;
+  }
+  50% {
+    background-size: 800% 100%;
+    background-position: left -49% top 0%;
+  }
+  100% {
+    background-size: 400% 100%;
+    background-position: left -102% top 0%;
+  }
 }

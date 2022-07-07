@@ -1,32 +1,32 @@
 {
-	"name": "cloud",
-	"version": "1.0.0",
-	"description": "The fullstack cloud project",
-	"main": "index.js",
-	"scripts": {
-		"prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx}'",
-		"prettier:fix": "prettier --write '**/*.{js,jsx,ts,tsx}'",
-		"lint": "eslint '**/*.{js,jsx,ts,tsx}'",
-		"lint:fix": "eslint --fix '**/*.{js,jsx,ts,tsx}'"
-	},
-	"devDependencies": {
-		"@next/eslint-plugin-next": "^12.2.0",
-		"@types/node": "^18.0.3",
-		"@types/react": "^18.0.15",
-		"@typescript-eslint/eslint-plugin": "^5.30.5",
-		"@typescript-eslint/parser": "^5.30.5",
-		"eslint": "^8.0.1",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-config-standard": "^17.0.0",
-		"eslint-plugin-import": "^2.25.2",
-		"eslint-plugin-n": "^15.0.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-promise": "^6.0.0",
-		"eslint-plugin-react": "^7.30.1",
-		"eslint-plugin-react-hooks": "^4.6.0",
-		"husky": "^8.0.1",
-		"lint-staged": "^13.0.3",
-		"prettier": "^2.7.1",
-		"typescript": "^4.7.4"
-	}
+  "name": "cloud",
+  "version": "1.0.0",
+  "description": "The fullstack cloud project",
+  "main": "index.js",
+  "scripts": {
+    "prettier:check": "prettier --ignore-unknown --check .",
+    "prettier:fix": "prettier --ignore-unknown --write .",
+    "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix '**/*.{js,jsx,ts,tsx}'"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^12.2.0",
+    "@types/node": "^18.0.3",
+    "@types/react": "^18.0.15",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
+  }
 }

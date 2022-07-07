@@ -1,9 +1,9 @@
 {
-	"label": "Cloud - Github",
-	"position": 4,
-	"link": {
-		"slug": "cloud-github",
-		"type": "generated-index",
-		"description": "Cloud Github"
-	}
+  "label": "Cloud - Github",
+  "position": 4,
+  "link": {
+    "slug": "cloud-github",
+    "type": "generated-index",
+    "description": "Cloud Github"
+  }
 }

@@ -9,40 +9,40 @@ import "styles/globals.css";
 import "github-markdown-css/github-markdown-light.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-	const pathname = pageProps.pathname ?? "/";
+  const pathname = pageProps.pathname ?? "/";
 
-	useEffect(() => setIsLoading(false), [pathname]);
+  useEffect(() => setIsLoading(false), [pathname]);
 
-	return (
-		<>
-			<Head>
-				<title>{`Deno - ${pathname}`}</title>
-				<meta name="description" content="Home cloud" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
-			{isLoading && (
-				<div className="fixed w-full">
-					<progress className="absolute top-0 linear-progress w-full" />
-				</div>
-			)}
-			<Header />
-			<main className="app">
-				<Tree pathname={pathname} />
-				<div className="app-main">
-					<div className="app-content">
-						<div className="app-display">
-							<LoadingContext.Provider value={{ isLoading, setIsLoading }}>
-								<Component {...pageProps} />
-							</LoadingContext.Provider>
-						</div>
-					</div>
-					<Info info={pageProps.response?.info} />
-				</div>
-			</main>
-		</>
-	);
+  return (
+    <>
+      <Head>
+        <title>{`Deno - ${pathname}`}</title>
+        <meta name="description" content="Home cloud" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {isLoading && (
+        <div className="fixed w-full">
+          <progress className="absolute top-0 linear-progress w-full" />
+        </div>
+      )}
+      <Header />
+      <main className="app">
+        <Tree pathname={pathname} />
+        <div className="app-main">
+          <div className="app-content">
+            <div className="app-display">
+              <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+                <Component {...pageProps} />
+              </LoadingContext.Provider>
+            </div>
+          </div>
+          <Info info={pageProps.response?.info} />
+        </div>
+      </main>
+    </>
+  );
 }
 
 export default MyApp;

@@ -1,37 +1,37 @@
 export type Item = {
-	id: number;
-	path: string;
-	name: string;
-	isDirectory: boolean;
-	isFile: boolean;
-	size: string;
-	modified: number;
-	created: number;
+  id: number;
+  path: string;
+  name: string;
+  isDirectory: boolean;
+  isFile: boolean;
+  size: string;
+  modified: number;
+  created: number;
 };
 
 export interface Info extends Item {
-	readme: {
-		has: boolean;
-		name?: string;
-		content?: string;
-	};
+  readme: {
+    has: boolean;
+    name?: string;
+    content?: string;
+  };
 }
 
 export interface Response {
-	success: boolean;
-	path: string;
-	content?: {
-		type: "file" | "markdown" | "media" | "directory";
-		data: string | { files: Item[]; directories: Item[] };
-		lines?: number;
-		code?: string;
-	};
+  success: boolean;
+  path: string;
+  content?: {
+    type: "file" | "markdown" | "media" | "directory";
+    data: string | { files: Item[]; directories: Item[] };
+    lines?: number;
+    code?: string;
+  };
 }
 
 export interface ListResponse extends Response {
-	info: Info;
+  info: Info;
 }
 
 export interface BlobResponse extends Response {
-	info: Item;
+  info: Item;
 }

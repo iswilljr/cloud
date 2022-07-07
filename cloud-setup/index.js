@@ -4,8 +4,8 @@ const shelljs = require("shelljs");
 const repo = process.argv[2];
 
 if (!repo | !["api", "deno", "github"].includes(repo)) {
-	console.log(repo);
-	process.exit(1);
+  console.log(repo);
+  process.exit(1);
 }
 
 const repoPath = path.join(process.cwd(), `cloud-${repo}`);

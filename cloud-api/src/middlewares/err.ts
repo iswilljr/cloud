@@ -3,5 +3,5 @@
 import { Request, Response } from "express";
 
 export const err = (err: any, req: Request, res: Response) => {
-	res.status(err.statusCode || 404).json({ success: false, message: err.message });
+  res.status(err.statusCode || 404).json({ success: false, message: err.message });
 };

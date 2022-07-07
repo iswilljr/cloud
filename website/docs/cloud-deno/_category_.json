@@ -1,9 +1,9 @@
 {
-	"label": "Cloud - Deno",
-	"position": 5,
-	"link": {
-		"slug": "cloud-deno",
-		"type": "generated-index",
-		"description": "Cloud Deno"
-	}
+  "label": "Cloud - Deno",
+  "position": 5,
+  "link": {
+    "slug": "cloud-deno",
+    "type": "generated-index",
+    "description": "Cloud Deno"
+  }
 }
