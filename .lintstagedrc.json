@@ -1,4 +1,4 @@
 {
 	"*.{js,jsx,ts,tsx}": ["yarn lint --fix"],
-	"*": ["prettier --ignore-unknown --write"]
+	"*": ["prettier --ignore-unknown --write ."]
 }

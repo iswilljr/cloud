@@ -29,3 +29,6 @@ public
 # locks
 package-lock.json
 yarn.lock
+
+# no ignore
+!cloud-api/src/lib
