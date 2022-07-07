@@ -15,21 +15,17 @@ const App = ({ pathname, response }: ListProps) => {
             <span className="ml-2 font-medium truncate">{decodeURI(pathname)}</span>
           </div>
         </div>
-        {response.content.type === "directory" && (
-          <>
-            {pathname !== "/" && <Display isDirectory goBack path={`${pathname}/..`} />}
-            {response.content.data.directories.concat(response.content.data.files).map((dir) => (
-              <Display key={dir.name} {...dir} />
-            ))}
-          </>
-        )}
+        {pathname !== "/" && <Display isDirectory goBack path={`${pathname}/..`} />}
+        {response.content.directories.concat(response.content.files).map((item) => (
+          <Display key={item.name} {...item} />
+        ))}
       </section>
-      {response.info.readme.has && (
+      {response.readme.has && (
         <File
           pathname={`/blob${pathname}`}
-          href={`/blob${pathname}/${response.info.readme.name}`}
-          name={response.info.readme.name}
-          dangerouslySetInnerHTML={{ __html: response.info.readme.content }}
+          href={`/blob${pathname}/${response.readme.name}`}
+          name={response.readme.name}
+          dangerouslySetInnerHTML={{ __html: response.readme.content }}
         />
       )}
     </>
