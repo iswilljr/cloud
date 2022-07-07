@@ -1,8 +1,9 @@
 ---
 sidebar_position: 6
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Create Home Cloud
 
@@ -63,7 +64,7 @@ yarn create home-cloud my-cloud github,deno -s
 ## Project name
 
 If you pass the project name as the first argument, it will be used as the project name.
-If you don't pass the project name, it will ask you to enter the project name, you can simply press enter and it will set the default project name. 
+If you don't pass the project name, it will ask you to enter the project name, you can simply press enter and it will set the default project name.
 
 - `default`: cloud
 
@@ -92,10 +93,9 @@ These are the options to be used.
 
 - `-h, --help`: Show the help.
 - `-p, --package-manager <package-manager>`: The package manager to be used
-	- options:
-		- `npm`: Use npm to install the dependencies.
-		- `yarn`: Use yarn to install the dependencies.
-		- `pnpm`: Use pnpm to install the dependencies.
-	- if you don't pass the package manager, it will ask you to enter the package manager.
+  - options:
+    - `npm`: Use npm to install the dependencies.
+    - `yarn`: Use yarn to install the dependencies.
+    - `pnpm`: Use pnpm to install the dependencies.
+  - if you don't pass the package manager, it will ask you to enter the package manager.
 - `-s, --skip-install`: Skip the installation of dependencies.
-

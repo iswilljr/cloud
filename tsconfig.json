@@ -6,9 +6,6 @@
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
 		"skipLibCheck": true,
-		"moduleResolution": "NodeNext",
-		"rootDir": "src",
-		"outDir": "lib"
-	},
-	"exclude": ["node_modules", "cloud"]
+		"moduleResolution": "NodeNext"
+	}
 }

@@ -9,11 +9,9 @@
 		"setup": "node ./build/setup.js",
 		"dev": "ts-node-dev --respawn src/index.ts",
 		"dev:setup": "ts-node-dev src/setup",
-		"tsc": "tsc --noEmit",
-		"build": "rm -rf build && tsc",
-		"build:tsc": "yarn tsc && yarn build",
-		"test": "cross-env NODE_ENV=test jest --testTimeout=10000",
-		"test:build": "yarn build && yarn test"
+		"type-check": "tsc --noEmit",
+		"build": "rm -rf build && tsc --build",
+		"build:tsc": "yarn tsc && yarn build"
 	},
 	"keywords": [],
 	"author": "",

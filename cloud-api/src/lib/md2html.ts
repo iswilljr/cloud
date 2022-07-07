@@ -18,8 +18,8 @@ async function md2html(markdown: string) {
 }
 
 md2html.highlight = function ({ code, lang }: { code: string; lang: string }) {
-	const backstics = "`".repeat(10);
-	const markdown = `${backstics}${lang}\n${code.replace(/\/$/, "")}${backstics}`;
+	const backtick = "`".repeat(10);
+	const markdown = `${backtick}${lang}\n${code.replace(/\/$/, "")}${backtick}`;
 	return md2html(markdown);
 };
 

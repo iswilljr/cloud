@@ -111,33 +111,37 @@ echo "# Test" >> __cloud_api_test__/test.md
 
 ```typescript
 type Item = {
- id: number; // Directory id
- path: string; // Directory path
- name: string; // Directory name
- isDirectory: boolean; // Whether is a directory or not
- isFile: boolean; // Whether is a file or not
- size: string; // Directory size
- modified: number; // Directory modified date
- created: number; // Directory created date
+	id: number; // Directory id
+	path: string; // Directory path
+	name: string; // Directory name
+	isDirectory: boolean; // Whether is a directory or not
+	isFile: boolean; // Whether is a file or not
+	size: string; // Directory size
+	modified: number; // Directory modified date
+	created: number; // Directory created date
 };
 
 type Response = {
- success: boolean; // Whether the request was successful
- path: string; // Directory path
- info: Item & { // Directory info
-  readme: { // Information about the readme file
-   has: boolean; // Whether Directory has a README.md file
-   name?: string; // Name of the README.md file
-   content?: string; // Content of the README.md file
-  };
- };
- content: { // Directory content
-  type: "directory"; // Content type
-  data: { // Content data
-   files: Item[]; // Files in the directory
-   directories: Item[]; // Directories in the directory
-  };
- };
+	success: boolean; // Whether the request was successful
+	path: string; // Directory path
+	info: Item & {
+		// Directory info
+		readme: {
+			// Information about the readme file
+			has: boolean; // Whether Directory has a README.md file
+			name?: string; // Name of the README.md file
+			content?: string; // Content of the README.md file
+		};
+	};
+	content: {
+		// Directory content
+		type: "directory"; // Content type
+		data: {
+			// Content data
+			files: Item[]; // Files in the directory
+			directories: Item[]; // Directories in the directory
+		};
+	};
 };
 ```
 
@@ -145,13 +149,14 @@ type Response = {
 
 ```typescript
 type Response = {
- success: boolean; // Whether the request was successful
- path: string; // File path
- info: Item; // File info
- content: { // File content
-  type: "file" | "media" | "markdown"; // Content type
-  data: string; // Content data
- };
+	success: boolean; // Whether the request was successful
+	path: string; // File path
+	info: Item; // File info
+	content: {
+		// File content
+		type: "file" | "media" | "markdown"; // Content type
+		data: string; // Content data
+	};
 };
 ```
 
@@ -159,8 +164,8 @@ type Response = {
 
 ```typescript
 type Response = {
- success: boolean; // Whether the request was successful
- message: string; // Error message
+	success: boolean; // Whether the request was successful
+	message: string; // Error message
 };
 ```
 
