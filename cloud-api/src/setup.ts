@@ -1,8 +1,7 @@
-import { config } from "dotenv";
+import "dotenv/config";
 import path from "path";
 import fs from "fs/promises";
-import { clearAndWrite, prompt } from "./lib/setup";
-config();
+import { clearAndWrite, prompt } from "./utils/prompt";
 
 const HOME_CLOUD_STORAGE = process.env.HOME_CLOUD_STORAGE;
 const TOKEN = process.env.TOKEN;

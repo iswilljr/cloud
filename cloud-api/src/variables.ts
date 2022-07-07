@@ -1,5 +1,4 @@
-import { config } from "dotenv";
-config();
+import "dotenv/config";
 
 const storage = process.env.HOME_CLOUD_STORAGE;
 const token = process.env.TOKEN;
@@ -11,3 +10,5 @@ if (!storage || !token) {
 }
 
 export { storage, token };
+
+export const IGNORE = /node_modules|\.git(?!(.))/gi;

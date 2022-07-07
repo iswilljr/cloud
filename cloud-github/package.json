@@ -1,6 +1,6 @@
 {
-  "name": "github",
-  "version": "2.0.0",
+  "name": "cloud-github",
+  "version": "2.0.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
