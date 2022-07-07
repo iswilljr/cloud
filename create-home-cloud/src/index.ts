@@ -117,7 +117,7 @@ export default async function createHomeCloud(
     if (repos) logger.info("invalid repos, asking for repos...");
     parsedRepos.push(...(await getRepos()));
   }
-  const parsedPM = await getPackageManager(packageManager);
+  const parsedPM = skipInstall ? "npm" : await getPackageManager(packageManager);
 
   const existFolderName = await existDir(path.join(rootdir, parsedFolderName));
   if (existFolderName) {

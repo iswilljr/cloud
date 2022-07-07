@@ -1,6 +1,6 @@
 {
   "name": "create-home-cloud",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Get started with the fullstack home cloud project",
   "main": "lib/index.js",
   "type": "module",
@@ -36,7 +36,7 @@
     "shelljs": "0.8.5"
   },
   "devDependencies": {
-    "@types/node": "18.0.1",
+    "@types/node": "18.0.3",
     "@types/prompts": "2.0.14",
     "@types/shelljs": "^0.8.11",
     "rimraf": "3.0.2",
