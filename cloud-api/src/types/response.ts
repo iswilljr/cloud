@@ -9,29 +9,22 @@ export type Item = {
   created: number;
 };
 
-export interface Info extends Item {
-  readme: {
-    has: boolean;
-    name?: string;
-    content?: string;
-  };
-}
-
-export interface Response {
+export interface ResponseBase {
+  info: Item;
   success: boolean;
   path: string;
-  content?: {
-    type: "file" | "markdown" | "media" | "directory";
-    data: string | { files: Item[]; directories: Item[] };
-    lines?: number;
-    code?: string;
-  };
 }
 
-export interface ListResponse extends Response {
-  info: Info;
+export interface ListResponse extends ResponseBase {
+  content?: { files: Item[]; directories: Item[] };
+  readme: { has: boolean; name?: string; content?: string };
 }
 
-export interface BlobResponse extends Response {
-  info: Item;
+export interface BlobResponse extends ResponseBase {
+  content?: { type: "file" | "markdown"; data: string; lines: number; code: string } | { type: "media"; data: string };
+}
+
+export interface ResponseFailure {
+  success: false;
+  message: string;
 }

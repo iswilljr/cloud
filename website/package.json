@@ -1,6 +1,6 @@
 {
-  "name": "config-env-file-docs",
-  "version": "3.0.1",
+  "name": "cloud-website",
+  "version": "2.0.4",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",

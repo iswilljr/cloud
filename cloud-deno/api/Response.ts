@@ -1,4 +1,4 @@
-export interface Item {
+export type Item = {
   id: number;
   path: string;
   name: string;
@@ -7,60 +7,36 @@ export interface Item {
   size: string;
   modified: number;
   created: number;
+};
+
+export interface ResponseBase {
+  info: Item;
+  success: boolean;
+  path: string;
 }
 
-export interface TypeDirectories {
-  type: "directory";
-  data: {
-    files: Item[];
-    directories: Item[];
-  };
-}
-
-export type BlobInfo = Item;
-
-export interface ListInfo extends Item {
+export interface ListResponse extends ResponseBase {
+  content: { files: Item[]; directories: Item[] };
   readme: { has: false } | { has: true; name: string; content: string };
 }
 
-interface TypeFile {
-  type: "file" | "markdown";
-  data: string;
-  lines: number;
-  code: string;
+export interface BlobResponse extends ResponseBase {
+  content: { type: "file" | "markdown"; data: string; lines: number; code: string } | { type: "media"; data: string };
 }
 
-interface ResponseBase {
-  success: true;
-  path: string;
-  content: TypeDirectories | TypeFile | { type: "media"; data: string };
-}
-
-export interface List extends ResponseBase {
-  info: ListInfo;
-}
-
-export interface Blob extends ResponseBase {
-  info: BlobInfo;
-}
-
-interface ResponseFailure {
+export interface ResponseFailure {
   success: false;
   message: string;
 }
 
-export type ListResponse = List | ResponseFailure;
-
-export type BlobResponse = Blob | ResponseFailure;
-
 export interface ListProps {
   type: "list";
-  response: ListResponse;
+  response: ListResponse | ResponseFailure;
   pathname: string;
 }
 
 export interface BlobProps {
   type: "blob";
-  response: BlobResponse;
+  response: BlobResponse | ResponseFailure;
   pathname: string;
 }
