@@ -1,7 +1,31 @@
+# dependencies
 node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# next.js
 .next
-.docusaurus
+out
+
+# production
 build
 dist
 lib
+
+# cache
+.cache
+
+# docusaurus
+.docusaurus
+.cache-loader
+
+# othes
 create-home-cloud/cloud
+public
+
+# locks
+package-lock.json
+yarn.lock
