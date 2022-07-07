@@ -1,4 +1,4 @@
-import { CalendarIcon, FolderOpenIcon, StarIcon } from "@heroicons/react/solid";
+import { CalendarIcon, StarIcon } from "@heroicons/react/solid";
 import { Item } from "api/Response";
 import { getTimeAgo } from "utils/get-time-ago";
 
@@ -8,8 +8,8 @@ const Info = ({ info }: { info?: Item }) => {
       <div className="info-content">
         <div className="info-card overflow-hidden">
           <div className="bg-gray-50 p-4">
-            <div className="text-xl font-bold uppercase">Home Clud{info?.name && ` - ${info.name}`}</div>
-            <div className="text-sm">A Home cloud app made in JavaScript</div>
+            <div className="text-xl font-bold uppercase">Cloud{info?.name && ` - ${info.name}`}</div>
+            <div className="text-sm">The fullstack cloud project</div>
             <div className="mt-3 flex items-center">
               <svg className="icon info-icon" fill="currentColor" viewBox="0 0 24 24">
                 <title>GitHub Repository</title>
@@ -32,12 +32,6 @@ const Info = ({ info }: { info?: Item }) => {
         {info && (
           <div className="info-card p-4">
             <p className="text-md font-semibold mb-2">Directory Info</p>
-            <div className="mt-2 flex text-sm items-center">
-              <FolderOpenIcon className="icon info-icon" />
-              <div>
-                Total size <span>{info.size}</span>
-              </div>
-            </div>
             <div className="mt-2 flex text-sm items-center">
               <CalendarIcon className="icon info-icon" />
               <div>

@@ -35,7 +35,10 @@ const Error = ({ pathname = "/", message, href }: { pathname?: string; message?:
       <p>
         We suggest you to go back to{" "}
         <Link replace href={href || "/home"}>
-          <a onClick={() => loading.setIsLoading(true)} className="link transition-colors duration-150">
+          <a
+            onClick={() => (href || "/home") !== "/home" && loading.setIsLoading(true)}
+            className="link transition-colors duration-150"
+          >
             Home
           </a>
         </Link>

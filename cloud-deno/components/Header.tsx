@@ -7,10 +7,10 @@ const Header = () => {
       <nav className="header">
         <Link href="/home">
           <a className="flex items-center">
-            <Image width={40} height={40} className="image" src="/logo.jpeg" alt="Home cloud" />
+            <Image width={40} height={40} className="image" src="/logo.svg" alt="Home cloud" />
             <div className="ml-5 flex flex-col justify-center">
-              <div className="name">Will</div>
-              <div className="page-name">Home Cloud</div>
+              <div className="name">Cloud</div>
+              <div className="page-name">The fullstack cloud project</div>
             </div>
           </a>
         </Link>
