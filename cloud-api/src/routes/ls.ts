@@ -19,7 +19,6 @@ router.get("/?*", async (req, res, next) => {
     const content: { files: Item[]; directories: Item[] } = { files: [], directories: [] };
     for await (const { name } of await fs.opendir(absolutePath)) {
       if (name.match(IGNORE)) continue;
-      console.log(name);
       const itemInfo = getItem(await fs.lstat(path.join(absolutePath, name)), path.join(relativePath, name));
       content[itemInfo.isDirectory ? "directories" : "files"].push(itemInfo);
       if (name.toLowerCase() === "readme.md" && response.readme.name !== "README.md") {

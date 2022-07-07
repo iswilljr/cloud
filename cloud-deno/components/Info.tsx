@@ -1,8 +1,8 @@
 import { CalendarIcon, FolderOpenIcon, StarIcon } from "@heroicons/react/solid";
-import { BlobInfo, ListInfo } from "api/Response";
+import { Item } from "api/Response";
 import { getTimeAgo } from "utils/get-time-ago";
 
-const Info = ({ info }: { info?: ListInfo | BlobInfo }) => {
+const Info = ({ info }: { info?: Item }) => {
   return (
     <div className="info">
       <div className="info-content">

@@ -11,7 +11,7 @@ const Blob = ({ pathname, response }: BlobProps) => {
           pathname={`/blob${pathname}`}
           href={`/blob${pathname}`}
           name={response.info.name}
-          dangerouslySetInnerHTML={{ __html: response.content.type !== "directory" ? response.content.data : "" }}
+          dangerouslySetInnerHTML={{ __html: response.content.data }}
         />
       ) : (
         <Error message="Sorry! this file can't be display here" />
