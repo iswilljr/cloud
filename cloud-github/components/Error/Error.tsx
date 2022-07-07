@@ -50,7 +50,7 @@ const Error = () => {
             <p>
               if not, you can see how to set it up{" "}
               <Text inherit variant="gradient" component="span">
-                <a href="/" target="_blank">
+                <a href="https://iswilljr.github.io/cloud/docs/cloud-api/installation" target="_blank">
                   here
                 </a>
               </Text>

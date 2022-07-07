@@ -39,28 +39,24 @@ const Home = ({ pathname, response }: ListProps) => {
             </div>
           </div>
         </div>
-        {response.content.type === "directory" && (
-          <>
-            {pathname !== "/" && (
-              <Display
-                name=".."
-                path={`${pathname}/..`}
-                styles={{
-                  name: { color: "var(--link-color)", textDecoration: "none", fontSize: "18px" },
-                }}
-              />
-            )}
-            {[...response.content.data.directories, ...response.content.data.files].map((item) => (
-              <Display key={item.id} {...item} />
-            ))}
-          </>
+        {pathname !== "/" && (
+          <Display
+            name=".."
+            path={`${pathname}/..`}
+            styles={{
+              name: { color: "var(--link-color)", textDecoration: "none", fontSize: "18px" },
+            }}
+          />
         )}
+        {[...response.content.directories, ...response.content.files].map((item) => (
+          <Display key={item.id} {...item} />
+        ))}
       </div>
-      {response.info.readme.has && (
+      {response.readme.has && (
         <div className={classes.markdown} id="readme">
           <div className={classes.markdownHeader}>
             <div className={classes.markdownTitle}>
-              <Link href={`/blob${pathname}${pathname.endsWith("/") ? "" : "/"}${response.info.readme.name}`}>
+              <Link href={`/blob${pathname}${pathname.endsWith("/") ? "" : "/"}${response.readme.name}`}>
                 <a className={defaultClasses.anchor}>README.md</a>
               </Link>
             </div>
@@ -69,12 +65,7 @@ const Home = ({ pathname, response }: ListProps) => {
             </div>
           </div>
           <div className={classes.markdownContent}>
-            <Markdown markdown={response.info.readme.content} />
-            <div
-              className="markdown-body"
-              style={{ maxWidth: "1012px", marginRight: "auto", marginLeft: "auto" }}
-              dangerouslySetInnerHTML={{ __html: response.info.readme.content }}
-            />
+            <Markdown markdown={response.readme.content} />
           </div>
         </div>
       )}
