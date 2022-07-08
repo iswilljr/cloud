@@ -8,7 +8,8 @@
     "prettier:check": "prettier --ignore-unknown --check .",
     "prettier:fix": "prettier --ignore-unknown --write .",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix '**/*.{js,jsx,ts,tsx}'"
+    "lint:fix": "eslint --fix '**/*.{js,jsx,ts,tsx}'",
+    "sync-branches": "sh scripts/sync-branches.sh"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^12.2.0",
