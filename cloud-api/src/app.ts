@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
-import list from "./routes/ls";
-import blob from "./routes/blob";
+import list from "./routes/ls.js";
+import blob from "./routes/blob.js";
 
 const port = process.env.PORT || 4000;
 

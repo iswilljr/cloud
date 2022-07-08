@@ -1,15 +1,15 @@
 import { promises as fs, Stats } from "fs";
 import path from "path";
-import fileSize from "file-size";
+import fileSize from "filesize";
 import axios from "axios";
-import { storage, token } from "../variables";
-import type { Item, ResponseBase } from "../types/response";
+import { storage, token } from "./variables.js";
+import type { Item } from "./types/response.js";
 
 export function sortBy(arr: object[], key: string) {
   return arr.sort((a: any, b: any) => (a[key].toLowerCase() > b[key].toLowerCase() ? 1 : -1));
 }
 
-export const getSize = (n: number) => fileSize(n, { fixed: 0 }).human("si");
+export const getSize = fileSize.partial({ base: 2, standard: "jedec" });
 
 const removeLastSeparator = (path: string) => (path.length > 1 ? path.replace(/\/$/, "") : path);
 
@@ -35,30 +35,21 @@ export function getItem(stats: Stats, relative: string): Item {
 export async function md2html(markdown: string): Promise<string | undefined> {
   const headers = { "Content-Type": "text/plain", Authorization: `Bearer ${token}` };
   try {
-    return (await axios.post("https://api.github.com/markdown/raw", markdown, { headers })).data.replace(/\n$/, "");
+    return (await axios.default.post("https://api.github.com/markdown/raw", markdown, { headers })).data;
   } catch (error: any) {
     console.log("[-] Something went wrong with md2html, make sure your token is correct");
-    console.log(`[-] Token: ${token?.replace(/_.*/g, (str) => "_" + "*".repeat(str.length))}`);
     console.log(`[-] Error: ${error.message}`);
   }
 }
 
 md2html.highlight = function ({ code, lang }: { code: string; lang: string }) {
   const backtick = "`".repeat(10);
-  const markdown = `${backtick}${lang}\n${code.replace(/\/$/, "")}${backtick}`;
-  return md2html(markdown);
+  return md2html(`${backtick}${lang}\n${code.replace(/\/$/, "")}${backtick}`);
 };
 
-type BasicInfo = {
-  response: ResponseBase;
-  item: Stats;
-  relativePath: string;
-  absolutePath: string;
-};
-
-export async function getBasicInfo(path: string): Promise<BasicInfo> {
+export async function getBasicInfo(path: string) {
   const { relativePath, absolutePath } = processPath(path);
-  const item = await fs.lstat(absolutePath);
-  const info = getItem(item, relativePath);
-  return { response: { success: true, path: relativePath, info }, item, absolutePath, relativePath };
+  const stats = await fs.lstat(absolutePath);
+  const item = getItem(stats, relativePath);
+  return { response: { success: true, path: relativePath, info: item }, stats, absolutePath, relativePath };
 }

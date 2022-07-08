@@ -1,9 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
 import { Router } from "express";
-import { IGNORE } from "../variables";
-import { getBasicInfo, getItem, md2html, sortBy } from "../utils/utils";
-import type { Item, ListResponse } from "../types/response";
+import { IGNORE } from "../variables.js";
+import { getBasicInfo, getItem, md2html, sortBy } from "../utils.js";
+import type { Item, ListResponse } from "../types/response.js";
 
 const router = Router();
 

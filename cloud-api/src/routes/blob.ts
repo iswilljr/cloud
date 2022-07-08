@@ -2,9 +2,9 @@ import { Router } from "express";
 import fs from "fs/promises";
 import mime from "mime-types";
 import path from "path";
-import { BlobResponse } from "../types/response";
-import { getBasicInfo, md2html } from "../utils/utils";
-import { IGNORE } from "../variables";
+import { BlobResponse } from "../types/response.js";
+import { getBasicInfo, md2html } from "../utils.js";
+import { IGNORE } from "../variables.js";
 
 const router = Router();
 
@@ -12,13 +12,13 @@ router.get("/?*", async (req, res, next) => {
   try {
     if (IGNORE.test(req.path)) throw new Error("File not found");
 
-    const { relativePath, absolutePath, response: resBase, item } = await getBasicInfo(req.path);
+    const { relativePath, absolutePath, response: resBase, stats } = await getBasicInfo(req.path);
     if (resBase.info.isDirectory) throw new Error("File not found");
 
     const response: BlobResponse = resBase;
 
     const filetype = mime.lookup(absolutePath);
-    if (item.size > 5242880 || (filetype && /image|video|audio/.test(filetype))) {
+    if (stats.size > 5242880 || (filetype && /image|video|audio/.test(filetype))) {
       response.content = { type: "media", data: `http://localhost:4000/download${relativePath}` };
     } else {
       const isMd = /\.md$/i.test(relativePath);
