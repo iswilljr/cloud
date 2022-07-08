@@ -25,3 +25,8 @@ git push
 # git pull
 # git merge master
 # git push
+
+git checkout website
+git pull
+git merge master
+git push
