@@ -1,10 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 import shelljs from "shelljs";
-import prompts from "prompts";
+import iq from "inquirer";
 import logger from "./logger.js";
-
-const onCancel = () => process.exit(1);
 
 export enum Repos {
   Github = "github",
@@ -15,8 +13,7 @@ export type PackageManager = "npm" | "yarn" | "pnpm";
 
 export async function getFolderName(): Promise<string> {
   const message = "Enter a name for your project...";
-  const initial = "cloud";
-  return (await prompts({ type: "text", name: "name", message, initial }, { onCancel })).name ?? "cloud";
+  return (await iq.prompt({ type: "input", name: "name", message, default: "cloud" })).name ?? "cloud";
 }
 
 export async function getRepos(): Promise<Repos[]> {
@@ -25,8 +22,18 @@ export async function getRepos(): Promise<Repos[]> {
     { title: "Deno", value: Repos.Deno },
   ];
   const message = "Select templates sites to install...";
-  const type = "multiselect";
-  return (await prompts({ type, name: "repos", message, choices, min: 1 }, { onCancel })).repos ?? [Repos.Github];
+  const type = "checkbox";
+  return (
+    (
+      await iq.prompt({
+        type,
+        name: "repos",
+        message,
+        choices,
+        validate: (repos) => (repos?.length ? true : "Please select at least one template"),
+      })
+    ).repos ?? [Repos.Github]
+  );
 }
 
 export async function getPackageManager(packageManager?: PackageManager): Promise<PackageManager> {
@@ -50,7 +57,7 @@ export async function getPackageManager(packageManager?: PackageManager): Promis
   const message = "Select a package manager...";
   const name = "pm";
 
-  return (await prompts({ type: "select", name, message, choices }, { onCancel })).pm ?? defaultPM;
+  return (await iq.prompt({ type: "list", name, message, choices })).pm ?? defaultPM;
 }
 
 export function getScripts(repo: string, folderName: string, rootdir: string, packageManager: PackageManager) {
