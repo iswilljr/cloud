@@ -1,97 +1,30 @@
-# HOME CLOUD API
+# CLOUD - API
 
 This is the cloud api for the fullstack cloud project
 
 ## DOCS
 
-- [Installation](#installation)
-- [Test](#test)
-- [Scripts](#scripts)
-- [HTTP requests](#http-requests)
-- [HTTP responses](#http-responses)
+See the [docs](https://iswilljr.github.io/cloud/docs/cloud-api/installation) for more information.
 
-## Installation
+## Get Started
 
-### Clone the repository
+start the server with the following command:
 
 ```bash
-git clone https://github.com/iswilljr/cloud-api.git
-```
-
-### Install dependencies
-
-With npm:
-
-```bash
-npm install
-```
-
-With yarn:
-
-```bash
-yarn
-```
-
-### Setup environment variables
-
-Environment variables that are needed:
-
-- `HOME_CLOUD_STORAGE`: The storage path for the home cloud (required)
-- `TOKEN`: The token for the github api (required)
-  - Generate a token with no scopes [here](https://github.com/settings/tokens/new)
-
-With npm:
-
-```bash
-npm run setup
-```
-
-With yarn:
-
-```bash
-yarn setup
-```
-
----
-
-## Test
-
-To pass the test, you need to make sure that the following directories and files are in the $HOME_CLOUD_STORAGE directory:
-
-- `__cloud_api_test__`: the directory that contains the test files
-- `__cloud_api_test__/test.txt`: the test file that contains the test data
-  - content: "ok\n"
-- `__cloud_api_test__/test.md`: the test md file
-  - content: "# Test\n"
-
-if $HOME_CLOUD_STORAGE is not set, see how to setup the environment variables in the [Setup](#setup-environment-variables) section.
-
-to get started, run the following command (make sure you change $HOME_CLOUD_STORAGE to the correct path):
-
-```bash
-cd $HOME_CLOUD_STORAGE
-mkdir __cloud_api_test__
-touch __cloud_api_test__/test.txt
-touch __cloud_api_test__/test.md
-echo "ok" >> __cloud_api_test__/test.txt
-echo "# Test" >> __cloud_api_test__/test.md
+yarn setup # or npm run
+yarn start # or npm
 ```
 
 ## Scripts
 
-- `yarn start`: Start the server
-- `yarn start:build`: Build the server and start it
-- `yarn setup`: Setup the environment variables
-- `yarn dev`: Start the server in development mode
-- `yarn dev:setup`: Setup the environment variables in development mode
-- `yarn tsc`: TypeScript check
-- `yarn build`: Build the server
-- `yarn build:tsc`: TypeScript check and build the server
-- `yarn lint`: Lint the code
-- `yarn lint:fix`: Lint the code and fix the issues
-- `yarn prettier`: Format the code
-- `yarn test`: Run the tests
-- `yarn test:build`: Build the server and run the tests
+- `start`: Start the server
+- `start:build`: Build the server and start it
+- `setup`: Setup the environment variables
+- `dev`: Start the server in development mode
+- `dev:setup`: Setup the environment variables in development mode
+- `typecheck`: TypeScript check
+- `build`: Build the server
+- `build:tsc`: TypeScript check and build the server
 
 ---
 
@@ -124,23 +57,17 @@ type Item = {
 type Response = {
   success: boolean; // Whether the request was successful
   path: string; // Directory path
-  info: Item & {
-    // Directory info
-    readme: {
-      // Information about the readme file
-      has: boolean; // Whether Directory has a README.md file
-      name?: string; // Name of the README.md file
-      content?: string; // Content of the README.md file
-    };
+  info: Item; // Directory info
+  readme: {
+    // Information about the readme file
+    has: boolean; // Whether Directory has a README.md file
+    name?: string; // Name of the README.md file
+    content?: string; // Content of the README.md file
   };
   content: {
-    // Directory content
-    type: "directory"; // Content type
-    data: {
-      // Content data
-      files: Item[]; // Files in the directory
-      directories: Item[]; // Directories in the directory
-    };
+    // Content data
+    files: Item[]; // Files in the directory
+    directories: Item[]; // Directories in the directory
   };
 };
 ```

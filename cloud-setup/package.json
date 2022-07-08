@@ -27,7 +27,7 @@
     "deno"
   ],
   "author": "iswilljr",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/iswilljr/cloud-setup/issues"
   },

@@ -24,7 +24,7 @@
     "home-cloud"
   ],
   "author": "iswilljr",
-  "license": "ISC",
+  "license": "MIT",
   "files": [
     "lib",
     "README.md"

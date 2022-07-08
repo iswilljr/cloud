@@ -3,6 +3,7 @@
   "version": "2.0.40",
   "description": "The fullstack cloud project",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "prettier:check": "prettier --ignore-unknown --check .",
     "prettier:fix": "prettier --ignore-unknown --write .",

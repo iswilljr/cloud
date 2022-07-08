@@ -9,13 +9,13 @@
     "setup": "node ./build/setup.js",
     "dev": "ts-node-dev --respawn src/index.ts",
     "dev:setup": "ts-node-dev src/setup",
-    "type-check": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "build": "rm -rf build && tsc --build",
     "build:tsc": "yarn tsc && yarn build"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",

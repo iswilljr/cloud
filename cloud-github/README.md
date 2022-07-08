@@ -1,13 +1,22 @@
-# HOME CLOUD
+# CLOUD - GITHUB
 
-you can setup this home cloud (with github interface) seeing the repo [cloud-setup](https://github.com/iswilljr/cloud-setup)
+you can setup this home cloud (with github interface) seeing the repo [cloud-setup](https://iswilljr.github.io/cloud/docs/cloud-setup) or with the cli tool [create-home-cloud](https://iswilljr.github.io/cloud/docs/create-home-cloud)
+
+## DOCS
+
+See the [docs](https://iswilljr.github.io/cloud/docs/cloud-github/installation) for more information.
 
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-yarn dev
-# or
-npm run dev
+yarn dev # or npm run
 ```
+
+## Scripts
+
+- `dev`: Start the server in development mode
+- `build`: Build the server
+- `start`: Start the server
+- `lint`: Lint the code
