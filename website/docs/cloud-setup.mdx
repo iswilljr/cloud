@@ -1,12 +1,25 @@
 ---
 sidebar_position: 2
+sidebar_label: Cloud - Setup
 ---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Cloud Setup
 
 This is a guide to setting up the home cloud environment
 
 ## Getting started
+
+First clone the repository, by running
+
+```bash
+mkdir cloud # or whatever you want to call your directory
+cd cloud # or whatever you called your directory
+curl https://codeload.github.com/iswilljr/cloud/tar.gz/master | \
+tar -xz --strip=2 cloud-master/cloud-api
+```
 
 Setup the home cloud api running the following commands:
 
@@ -23,19 +36,29 @@ the next step is to setup the home cloud, options:
 - Github
 - Deno
 
-with the github interface you can setup the cloud running the following commands
+<Tabs>
+<TabItem value="github" label="Github">
+
+With the github interface you can setup the cloud running the following commands
 
 ```bash
 yarn install:github
 yarn build
 ```
 
-with the deno interface you can setup the cloud running the following commands
+</TabItem>
+<TabItem value="deno" label="Deno">
+
+With the deno interface you can setup the cloud running the following commands
 
 ```bash
 yarn install:deno
 yarn build
 ```
+
+</TabItem>
+
+</Tabs>
 
 ## Scritps
 

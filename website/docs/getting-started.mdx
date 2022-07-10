@@ -9,13 +9,15 @@ import TabItem from "@theme/TabItem";
 
 Let's discover how to start with the fullstack cloud project
 
-Get started by creating the **cloud**.
-
 ## What you'll need
 
 - [Node.js](https://nodejs.org/en/download/) version 14 or above:
 
 ## Generate the cloud
+
+Get started by creating the **cloud** with the next options
+
+### With Create Home Cloud
 
 Generate the cloud site using the [create home cloud](https://www.npmjs.com/package/create-home-cloud) tool.
 
@@ -43,6 +45,41 @@ You can type this command into Command Prompt, Powershell, Terminal, or any othe
 
 The command also installs all necessary dependencies you need to run the cloud.
 
+See the [documentation](./create-home-cloud) for more information.
+
+### With Repo Cloud Setup
+
+Generate the cloud site using the repo cloud setup.
+
+First clone the repository, by running
+
+```bash
+mkdir cloud # or whatever you want to call your directory
+cd cloud # or whatever you called your directory
+curl https://codeload.github.com/iswilljr/cloud/tar.gz/master | \
+tar -xz --strip=2 cloud-master/cloud-setup
+```
+
+Setup the cloud running the following commands:
+
+```bash
+yarn install:api && cd ..
+yarn install:github && cd ..
+yarn install:deno && cd ..
+```
+
+See the [documentation](./cloud-setup) for more information.
+
+### Manually
+
+You can simply clone the main repo by running:
+
+```bash
+git clone --depth 1 https://github.com/iswilljr/cloud
+```
+
+Then you can delete the files and directories you don't need. Make sure you install all the dependencies.
+
 ## Start your site
 
 Run the server:
@@ -51,16 +88,20 @@ Run the server:
 <TabItem value="npm" label="npm">
 
 ```bash
-cd server
-npm start:build
+cd cloud/cloud-api # or whatever you called your directories
+npm run build
+npm run setup
+npm start
 ```
 
 </TabItem>
 <TabItem value="yarn" label="Yarn">
 
 ```bash
-cd server
-yarn start:build
+cd cloud/cloud-api # or whatever you called your directories
+yarn build
+yarn setup
+yarn start
 ```
 
 </TabItem>
@@ -69,6 +110,4 @@ yarn start:build
 
 The `cd` command changes the directory you're working with. In order to work with your newly created Cloud site, you'll need to navigate the terminal there.
 
-The `npm start` or `yarn start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-See the create-home-cloud [documentation](./create-home-cloud) for more information.
+The `build` command builds the site. The `setup` command set up the env variables that the server needs. The `start` command starts the server on port 4000.

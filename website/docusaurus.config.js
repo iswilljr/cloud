@@ -5,7 +5,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Cloud Docs",
+  title: "Cloud",
   tagline: "The fullstack cloud project",
   url: "https://iswilljr.github.io/",
   baseUrl: "/cloud/",
@@ -33,11 +33,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: "Cloud Docs",
-        logo: { alt: "Cloud Docs Logo", src: "img/logo.svg" },
+        title: "Cloud",
+        logo: { alt: "Cloud Logo", src: "img/logo.svg" },
         items: [
-          { type: "doc", docId: "getting-started", position: "left", label: "Get Started" },
-          { href: "https://github.com/iswilljr/cloud-docs", label: "GitHub", position: "right" },
+          { to: "/docs/getting-started", position: "left", label: "Get Started" },
+          { href: "https://github.com/iswilljr/cloud", label: "GitHub", position: "right" },
         ],
       },
       footer: {

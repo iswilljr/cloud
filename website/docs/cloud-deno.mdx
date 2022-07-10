@@ -1,0 +1,88 @@
+---
+sidebar_position: 5
+sidebar_label: Cloud - Deno
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Cloud Deno
+
+How to install the cloud deno.
+
+## Installation
+
+First clone the repository, by running
+
+```bash
+mkdir deno # or whatever you want to call your directory
+cd deno # or whatever you called your directory
+curl https://codeload.github.com/iswilljr/cloud/tar.gz/master | \
+tar -xz --strip=2 cloud-master/cloud-deno
+```
+
+## Install dependencies
+
+Install the dependencies by running
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```bash
+npm install
+```
+
+</TabItem>
+<TabItem value="yarn" label="Yarn">
+
+```bash
+yarn install
+```
+
+</TabItem>
+
+</Tabs>
+
+## Build the website
+
+Build the website by running
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```bash
+npm run build
+```
+
+</TabItem>
+<TabItem value="yarn" label="Yarn">
+
+```bash
+yarn build
+```
+
+</TabItem>
+
+</Tabs>
+
+## Start the web server
+
+Start the web server by running
+
+<Tabs>
+<TabItem value="npm" label="npm">
+
+```bash
+npm start
+```
+
+</TabItem>
+<TabItem value="yarn" label="Yarn">
+
+```bash
+yarn start
+```
+
+</TabItem>
+
+</Tabs>
