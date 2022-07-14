@@ -3,8 +3,26 @@ import { createServerSideProps } from "utils/create-server-side-props";
 import type { ListProps } from "api/types";
 import File from "components/File";
 import Error from "../Error";
+import { AlertContext } from "context/alert";
+import { useContext, useEffect } from "react";
 
 const Home = ({ pathname, response }: ListProps) => {
+  const alert = useContext(AlertContext);
+  const message = response.success && !response.readme.has && response.readme.message;
+
+  useEffect(() => {
+    if (message) {
+      alert.setType(message);
+      alert.setMessage(
+        message === "error"
+          ? "Seems like the github token is invalid, please make sure you have a right one (README.md content won't be displayed)."
+          : "Github token is missing (README.md content won't be displayed)."
+      );
+      alert.setShowAlert(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
+
   return response.success ? (
     <>
       <div className="flex flex-col overflow-x-auto">

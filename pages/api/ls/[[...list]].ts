@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { IGNORE } from "api/variables";
+import { IGNORE, token } from "api/variables";
 import { getBasicInfo, getItem, md2html, sortBy } from "api/utils";
 import type { Item, ListApiResponse } from "api/types";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -33,7 +33,8 @@ export default async function Handler(req: NextApiRequest, res: NextApiResponse)
     if (response.readme.has && response.readme.name) {
       const md = await fs.readFile(path.join(absolutePath, response.readme.name), "utf8");
       const html = await md2html(md);
-      response.readme.content = html || "";
+      if (html) response.readme.content = html;
+      else response.readme = { has: false, message: token ? "error" : "warn" };
     }
 
     response.content = content;

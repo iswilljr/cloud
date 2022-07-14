@@ -11,7 +11,7 @@ export type Item = {
 
 export interface ResponseBase {
   info: Item;
-  success: boolean;
+  success: true;
   path: string;
 }
 
@@ -19,12 +19,12 @@ type ListContent = { files: Item[]; directories: Item[] };
 
 export interface ListApiResponse extends ResponseBase {
   content?: ListContent;
-  readme: { has: boolean; name?: string; content?: string };
+  readme: { has: boolean; name?: string; content?: string; message?: "error" | "warn" };
 }
 
 export interface ListResponse extends ResponseBase {
   content: ListContent;
-  readme: { has: false } | { has: true; name: string; content: string };
+  readme: { has: false; message?: "error" | "warn" } | { has: true; name: string; content: string };
 }
 
 type BlobContent =

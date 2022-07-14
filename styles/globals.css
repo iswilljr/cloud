@@ -26,6 +26,8 @@
   --border-color: rgb(229, 231, 235);
   --link-color: #057cf0;
   --link-hover-color: #3b82f6;
+  --alert-warning-background-color: #ffb700;
+  --alert-error-background-color: #f85149;
 }
 [data-theme="github"] {
   --background-color: var(--ultradark-color);
@@ -39,6 +41,8 @@
   --border-color: #30363d;
   --link-color: #c1d1d9;
   --link-hover-color: var(--blue-color);
+  --alert-warning-background-color: #9e6a03;
+  --alert-error-background-color: #da3633;
   color: var(--light-color);
 }
 html,
@@ -88,4 +92,10 @@ body {
 
 [data-theme="github"] .sep {
   color: #8b949e;
+}
+.alert-warn {
+  background-color: var(--alert-warning-background-color) !important;
+}
+.alert-error {
+  background-color: var(--alert-error-background-color) !important;
 }

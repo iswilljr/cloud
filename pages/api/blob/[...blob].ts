@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import mime from "mime-types";
 import path from "path";
 import { getBasicInfo, md2html } from "api/utils";
-import { IGNORE } from "api/variables";
+import { IGNORE, token } from "api/variables";
 import type { BlobApiResponse } from "api/types";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -26,9 +26,14 @@ export default async function Handler(req: NextApiRequest, res: NextApiResponse)
       const html = await (isMd
         ? md2html(file)
         : md2html.highlight({ code: file, lang: path.extname(relativePath).slice(1) }));
+      if (!html) {
+        throw new Error(
+          token ? "error - could not display file, invalid token" : "warn - could not display file, token is not set"
+        );
+      }
       response.content = {
         type: isMd ? "markdown" : "file",
-        data: html || "",
+        data: html,
         lines: file.replace(/\n$/, "").split("\n").length,
         code: file,
       };

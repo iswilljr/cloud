@@ -1,9 +1,7 @@
 import { Item } from "api/types";
-import { LoadingContext } from "context/loading-context";
 import FileIcon from "icons/File";
 import FolderIcon from "icons/Folder";
 import NextLink from "next/link";
-import { useContext } from "react";
 import { usePath } from "utils/get-path";
 import { getTimeAgo } from "utils/get-time-ago";
 
@@ -33,11 +31,9 @@ const Display = ({ name, modified, isFile, isDirectory }: Partial<Item>) => {
 };
 
 function Link({ href, className, children }: { href: string; className?: string; children: React.ReactNode }) {
-  const loading = useContext(LoadingContext);
-
   return (
     <NextLink href={href}>
-      <a className={className} onClick={() => loading.setIsLoading(true)} tabIndex={-1}>
+      <a className={className} tabIndex={-1}>
         {children}
       </a>
     </NextLink>

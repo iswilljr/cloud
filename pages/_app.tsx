@@ -10,6 +10,7 @@ const Layout = dynamic(() => import("components/Layout"));
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { ui } = usePath();
+
   return ui ? (
     <Layout>
       <Component {...pageProps} />

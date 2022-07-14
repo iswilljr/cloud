@@ -1,6 +1,3 @@
-// import { LoadingContext } from "context/loading-context";
-// import { useContext } from "react";
-
 import Link from "next/link";
 import { usePath } from "utils/get-path";
 

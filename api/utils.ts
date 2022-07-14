@@ -2,6 +2,7 @@ import { promises as fs, Stats } from "fs";
 import path from "path";
 import fileSize from "filesize";
 import { storage, token } from "./variables";
+import { error } from "next/dist/build/output/log";
 import type { Item } from "./types";
 
 export function sortBy(arr: object[], key: string) {
@@ -32,16 +33,21 @@ export function getItem(stats: Stats, relative: string): Item {
 }
 
 export async function md2html(markdown: string): Promise<string | undefined> {
+  if (!token) return;
   const headers = { "Content-Type": "text/plain", Authorization: `Bearer ${token}` };
   try {
     return await fetch("https://api.github.com/markdown/raw", {
       method: "POST",
       headers,
       body: markdown,
-    }).then((res) => res.text());
-  } catch (error: any) {
-    console.log("[-] Something went wrong with md2html, make sure your token is correct");
-    console.log(`[-] Error: ${error.message}`);
+    }).then((res) => {
+      if (res.status === 200) return res.text();
+      error(`GitHub API returned status ${res.status}`);
+      return;
+    });
+  } catch (err: any) {
+    error("something went wrong with md2html, make sure your token is correct");
+    error(err.message);
   }
 }
 
@@ -50,7 +56,18 @@ md2html.highlight = function ({ code, lang }: { code: string; lang: string }) {
   return md2html(`${backtick}${lang}\n${code.replace(/\/$/, "")}${backtick}`);
 };
 
-export async function getBasicInfo(path: string) {
+type BasicInfo = {
+  response: {
+    success: true;
+    path: string;
+    info: Item;
+  };
+  stats: Stats;
+  absolutePath: string;
+  relativePath: string;
+};
+
+export async function getBasicInfo(path: string): Promise<BasicInfo> {
   const { relativePath, absolutePath } = processPath(path);
   const stats = await fs.lstat(absolutePath);
   const item = getItem(stats, relativePath);
