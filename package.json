@@ -8,13 +8,11 @@
     "start": "next start",
     "dev": "next dev",
     "build": "next build",
-    "build:website": "next build && mv .next website && cp -r public website/public",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}' .",
     "lint:fix": "yarn lint --fix",
     "prettier:check": "prettier --ignore-unknown --check .",
     "prettier:fix": "prettier --ignore-unknown --write .",
-    "sync-branches": "sh scripts/sync-branches.sh",
-    "clear": "rimraf .next out website/public website/.next"
+    "sync-branches": "sh scripts/sync-branches.sh"
   },
   "dependencies": {
     "filesize": "^9.0.11",
