@@ -10,10 +10,11 @@ Cloud is a project for display your local files and directories in a web browser
 
 ## Installation
 
-Use the cli tool [create-home-cloud](https://iswilljr.github.io/cloud/docs/create-home-cloud) to create your home cloud.
-
 ```bash
-yarn create home-cloud
+git clone https://github.com/iswilljr/cloud
+cd cloud
+yarn install
+yarn build
 ```
 
 ## License
