@@ -8,7 +8,7 @@ const PORT = argPort !== -1 && process.argv[argPort + 1];
 const HOST = address.ip();
 
 (async () => {
-  let env = await fs.readFile(".env.local", "utf8");
+  let env = await fs.readFile(".env.local", "utf8").catch(() => "");
   const getValue = (key) => env.match(new RegExp(`${key}\=(.*)\n`))?.[1];
   const replace = (key, value) => env.replace(getValue(key), value);
   const addValue = (key, value) => (env += `\n${key}=${value}\n`);
