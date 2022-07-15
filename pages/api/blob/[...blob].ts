@@ -19,7 +19,7 @@ export default async function Handler(req: NextApiRequest, res: NextApiResponse)
 
     const filetype = mime.lookup(absolutePath);
     if (stats.size > 5242880 || (filetype && /image|video|audio/.test(filetype))) {
-      response.content = { type: "media", data: `http://localhost:4000/download${relativePath}` };
+      response.content = { type: "media", data: "" };
     } else {
       const isMd = /\.md$/i.test(relativePath);
       const file = await fs.readFile(absolutePath, "utf8");

@@ -1,12 +1,13 @@
-import { AlertContext } from "context/alert";
-import { useContext } from "react";
+import { getCookies, setCookie } from "cookies-next";
+import { useAlertState } from "store/store";
 
 const Alert = () => {
-  const alert = useContext(AlertContext);
+  const alert = useAlertState();
+  const { type, "list-alert-state": listAlertState, "blob-alert-state": blobAlertState } = getCookies();
 
   return (
     <>
-      {alert.showAlert && (
+      {alert.show && type && (type === "list" ? listAlertState !== "closed" : blobAlertState !== "closed") && (
         <div
           className={`alert alert-${alert.type} flex items-center justify-center p-1 text-center text-white`}
           role={"alert"}
@@ -15,7 +16,10 @@ const Alert = () => {
           <button
             type="button"
             className="absolute right-4"
-            onClick={() => alert.setShowAlert(false)}
+            onClick={() => {
+              alert.setShow(false);
+              setCookie(`${type}-alert-state`, "closed", { maxAge: 60 * 60 * 10 });
+            }}
             aria-label="Close"
           >
             <svg viewBox="0 0 15 15" width={14} height={14}>

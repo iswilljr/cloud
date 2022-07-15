@@ -12,9 +12,12 @@ const Header = ({ color }: { color?: string }) => {
       <div className="section-x-inset-xl py-3">
         <nav className="flex justify-between">
           <div className="flex h-9 w-auto select-none items-center">
-            <Link href={`/${ui}/home`}>
-              <a className="block h-8 w-8">
+            <Link href={ui ? `/${ui}/home` : "/"}>
+              <a className="flex h-8 items-center">
                 <Image width={32} height={32} src={`${ui ? `/${ui}/` : "/"}logo.svg`} alt={`${ui || "cloud"} logo`} />
+                <span className="ml-4 text-xl font-semibold">
+                  Cloud{ui && ` - ${ui === "deno" ? "Deno" : "GIthub"}`}
+                </span>
               </a>
             </Link>
           </div>

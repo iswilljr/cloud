@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "next start",
+    "start": "node scripts/start.mjs",
     "dev": "next dev",
     "build": "next build",
     "lint": "eslint '**/*.{js,jsx,ts,tsx}' .",
@@ -15,6 +15,9 @@
     "sync-branches": "sh scripts/sync-branches.sh"
   },
   "dependencies": {
+    "address": "^1.2.0",
+    "cookies-next": "^2.1.1",
+    "execa": "^6.1.0",
     "filesize": "^9.0.11",
     "github-markdown-css": "^5.1.0",
     "inquirer": "^9.0.1",
@@ -22,7 +25,8 @@
     "next": "^12.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "redaxios": "^0.5.0"
+    "redaxios": "^0.5.0",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@types/inquirer": "^8.2.1",

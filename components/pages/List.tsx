@@ -3,11 +3,11 @@ import { createServerSideProps } from "utils/create-server-side-props";
 import type { ListProps } from "api/types";
 import File from "components/File";
 import Error from "../Error";
-import { AlertContext } from "context/alert";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
+import { useAlertState } from "store/store";
 
 const Home = ({ pathname, response }: ListProps) => {
-  const alert = useContext(AlertContext);
+  const alert = useAlertState();
   const message = response.success && !response.readme.has && response.readme.message;
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Home = ({ pathname, response }: ListProps) => {
           ? "Seems like the github token is invalid, please make sure you have a right one (README.md content won't be displayed)."
           : "Github token is missing (README.md content won't be displayed)."
       );
-      alert.setShowAlert(true);
+      alert.setShow(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message]);

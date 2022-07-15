@@ -2,11 +2,11 @@ import File from "components/File";
 import { createServerSideProps } from "utils/create-server-side-props";
 import type { BlobProps } from "api/types";
 import Error from "../Error";
-import { useContext, useEffect } from "react";
-import { AlertContext } from "context/alert";
+import { useEffect } from "react";
+import { useAlertState } from "store/store";
 
 const Blob = ({ response }: BlobProps) => {
-  const alert = useContext(AlertContext);
+  const alert = useAlertState();
 
   const type = !response.success && response.message.match(/^(warn|error)\s-\s.*/)?.[1];
   const title = !!type && "Something went wrong";
@@ -21,7 +21,7 @@ const Blob = ({ response }: BlobProps) => {
           ? "Seems like the github token is invalid, please make sure you have a right one (file content won't be displayed)."
           : "Github token is missing (file content won't be displayed)."
       );
-      alert.setShowAlert(true);
+      alert.setShow(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message, type]);

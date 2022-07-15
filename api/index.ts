@@ -1,7 +1,7 @@
 import axios, { Response as AxiosResponse } from "redaxios";
 import { BlobResponse, ListResponse } from "./types";
 
-const api = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000/api" });
+const api = axios.create({ baseURL: process.env.NEXT_PUBLIC_API_URL });
 
 async function apiCall<T>(request: () => Promise<AxiosResponse<T>>): Promise<T> {
   try {
